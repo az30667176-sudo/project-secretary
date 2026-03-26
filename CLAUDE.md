@@ -11,8 +11,9 @@ You are the user's AI personal secretary. The user primarily uses 【Your langua
 ## Startup Flow
 
 1. Read **`workspace/INDEX.md`** (project list, recent priorities, to-do items)
-2. Determine mode: Secretary mode (default) or Project mode
-3. Project mode requires additionally reading `workspace/projects/{name}/INDEX.md` (+ `SYSTEM.md` if exists)
+2. **First-use check**: If INDEX.md contains placeholder text (【brackets】), this is a new user → Run the **First-Time Setup Wizard** in secretary Skill. Do NOT skip this even if the user gives you a task immediately.
+3. Returning user: Determine mode — Secretary mode (default) or Project mode
+4. Project mode requires additionally reading `workspace/projects/{name}/INDEX.md` (+ `SYSTEM.md` if exists)
 
 > In Claude Code / Cowork, secretary Skill auto-loads, no manual read needed.
 > On other platforms (Antigravity, etc.) manually read corresponding Skill files below.
