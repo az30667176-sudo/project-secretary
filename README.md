@@ -162,7 +162,7 @@ High-stakes business decisions can trigger a Debate — inviting an Advocate and
 ## Getting Started
 
 1. Read `docs/quickstart.md` (5-minute quick start)
-2. Read `workspace/BEGINNER-TIPS.md` (usage tips)
+2. Read `docs/BEGINNER-TIPS.md` (usage tips)
 3. Check `docs/faq.md` (common questions)
 4. Look up `docs/lessons-learned.md` when you hit issues (15 pitfalls)
 
@@ -413,7 +413,7 @@ your-project/
 ## 新手入門
 
 1. 讀 `docs/quickstart.md`（5 分鐘快速開始）
-2. 讀 `workspace/BEGINNER-TIPS.md`（使用技巧）
+2. 讀 `docs/BEGINNER-TIPS.md`（使用技巧）
 3. 看 `docs/faq.md`（常見問題 11 題）
 4. 遇到問題查 `docs/lessons-learned.md`（15 個踩坑紀錄）
 
