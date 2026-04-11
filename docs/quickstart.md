@@ -1,5 +1,7 @@
 # Quick Start Guide
 
+> **First time here?** Read [`concept-guide.md`](concept-guide.md) first — it explains what this system is and why it exists (5 min).
+
 Welcome to the AI Secretary system! This guide gets you set up in 5 minutes.
 
 ---
@@ -82,9 +84,10 @@ Secretary: "Did Review and organized everything"
 ├── .claude/
 │   └── skills/                        ← All Skills
 │       ├── secretary/SKILL.md         ← Core rules
-│       ├── review/SKILL.md            ← Wrap-up flow (12-item checklist)
+│       ├── review/SKILL.md            ← Wrap-up flow (13-item checklist)
 │       ├── project-setup/SKILL.md     ← Project launch
-│       ├── knowledge-base/SKILL.md    ← URL → summarize → archive
+│       ├── knowledge-base/SKILL.md    ← URL → summarize → synthesis → archive
+│       ├── github-recon/SKILL.md      ← Paste GitHub URL → security check
 │       └── ...（other Skills）
 └── workspace/
     ├── INDEX.md                        ← Main index (most important)
@@ -92,6 +95,11 @@ Secretary: "Did Review and organized everything"
     ├── inbox/                          ← Daily journals (auto-created)
     ├── projects/                       ← Project directory (auto-created)
     ├── summaries/                      ← Weekly/monthly summaries (auto-created)
+    ├── knowledge-base/                 ← Personal knowledge base
+    │   ├── articles/                   ← Saved articles
+    │   ├── videos/                     ← Saved videos
+    │   ├── synthesis/                  ← Cross-article compiled pages (V0.5)
+    │   └── health-check/              ← KB health reports
     └── refs/                           ← Reference materials
         └── debate-agents/             ← Debate protocol and personas
 ```
@@ -108,6 +116,7 @@ Secretary: "Did Review and organized everything"
 | Generate weekly report | "Generate weekly report" (secretary asks if there's anything new) |
 | Return to secretary mode | "Return to secretary mode" |
 | Save a link to knowledge base | "Save this: [URL]" |
+| Security-check a GitHub repo | Paste a GitHub URL (auto-triggers recon) |
 | Check memory status | "Secretary, what do you remember?" |
 
 ---

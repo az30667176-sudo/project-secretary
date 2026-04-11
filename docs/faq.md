@@ -226,11 +226,17 @@ See project-setup Skill's branching logic.
 |---|---|
 | Articles | `workspace/knowledge-base/articles/YYYY-MM-DD-slug.md` |
 | Videos | `workspace/knowledge-base/videos/YYYY-MM-DD-slug.md` |
+| Synthesis pages | `workspace/knowledge-base/synthesis/{topic}.md` |
 
 **Project bridging** (the key differentiator):
 - Each saved article gets tagged with related projects
 - Secretary writes actionable digests to `projects/{name}/refs/kb-digest.md`
 - Project agents read these on-demand for background knowledge
+
+**Synthesis layer** (V0.5 new):
+- When multiple articles share a topic, secretary compiles a **synthesis page** — a cross-article summary organized by theme
+- Query uses **L1→L2→L3 tiered search**: first check the wiki index list (L1), then synthesis pages (L2), only open original articles (L3) when needed — saves tokens significantly
+- Synthesis pages update continuously as new articles come in, so knowledge compounds over time
 
 **Example workflow**:
 ```
@@ -240,6 +246,95 @@ Secretary: "Saved! Related to project Marketing-Strategy.
             - Key insight: [actionable summary]
             - Action item: [what to do next]"
 ```
+
+---
+
+## Q12: What is github-recon? When does it trigger?
+
+**A:** github-recon is a **security reconnaissance Skill** that auto-triggers when you paste a GitHub repo URL in conversation.
+
+**What it does**:
+- Scans the repo's README, directory structure, dependencies, and commit patterns
+- Produces a Red / Yellow / Green traffic-light assessment
+- Checks a **red-flag list**: hardcoded secrets, suspicious install scripts, typosquatting package names, etc.
+
+**Important distinction**: Recon ≠ source code review. Recon is a quick, read-only safety check before you clone or install anything. A full code review is a separate, deeper process.
+
+**When to use**:
+- Someone recommends a new tool or library → paste the URL, let recon run first
+- Evaluating an MCP server or plugin → recon before installing
+
+---
+
+## Q13: What is "synthesis correction"?
+
+**A:** When the review Skill runs the 13-item checklist, item A5 checks for **synthesis correction** — cases where new information contradicts or updates what's already in a synthesis page.
+
+**Example**: Your synthesis page says "Tool X doesn't support feature Y," but today's article shows it now does. The secretary flags this, annotates the correction, and updates the synthesis page.
+
+**Why it matters**: Without this, your compiled knowledge becomes stale. Synthesis correction keeps your knowledge base accurate as the world changes.
+
+---
+
+## Q14: How much does this cost?
+
+**A:** Depends on your setup:
+
+| Component | Cost | Required? |
+|---|---|---|
+| **Claude Max plan** | ~$100/month | Recommended (Opus access) |
+| **Claude Pro plan** | ~$20/month | Works fine (Sonnet) |
+| **Cloud VM** (GCP/AWS) | ~$5-10/month | Only if you need 24/7 cron jobs |
+| **Gemini API** (Deep Research) | ~$0-5/month | Only if using Gemini for research |
+| **The files themselves** | Free | Just Markdown on your computer |
+
+**Minimum viable cost**: $20/month (Pro plan + local only). That gets you secretary mode, project management, knowledge base — everything except the most capable model.
+
+**Author's setup**: ~$100/month (Max plan) + ~$7/month (GCP e2-micro VM for cron jobs). No API costs most months because Max plan includes generous usage.
+
+**Cost-saving tips**:
+- Use Sonnet (cheaper) for routine tasks, Opus only for decisions and deep thinking
+- Run cron jobs on your own machine if it's always on — skip the VM
+- GCP gives $300 free credits for new accounts
+
+---
+
+## Q15: Is it safe? Will the AI delete my files?
+
+**A:** The AI operates within its working directory and can read/write any files there. This is powerful but comes with risk.
+
+**Real incident**: The author's AI accidentally deleted a local file via terminal command. The file bypassed the trash — no recovery via Finder. Fortunately, git backup had it.
+
+**Best practices (built into the system)**:
+
+1. **Git backup everything** — Push to a private GitHub repo regularly. The handoff Skill includes git-commit handoff for platforms that can't push directly
+2. **Use a dedicated folder** — Don't mount your entire home directory. Create a specific folder for this system
+3. **Review before approving** — When the AI asks to run a command or modify a file, read what it's doing. Don't blindly approve
+4. **`.gitignore` sensitive files** — The template includes rules to exclude credentials, API keys, and personal data from git
+5. **(Optional) Use a separate machine or partition** — For maximum isolation, run on a dedicated machine or a virtual disk
+
+**Bottom line**: Benefits significantly outweigh risks if you follow the backup practices. The system has been running daily for 3+ weeks with no data loss after the initial incident.
+
+---
+
+## Q16: How is this different from Claude Projects?
+
+**A:** Claude Projects is great for single-topic deep work. This system is for managing your entire work life across multiple projects.
+
+| Feature | Claude Projects | This System |
+|---|---|---|
+| **Scope** | One project at a time | Multiple projects + global overview |
+| **Memory** | Project-level only (~200KB) | Layered: INDEX → inbox → memory → summaries |
+| **Cross-project awareness** | ❌ | ✅ Secretary sees all projects |
+| **Self-organization** | ❌ Manual | ✅ Automated review rhythm (daily/weekly/monthly) |
+| **Cross-session handoff** | ❌ Start fresh each time | ✅ Structured handoff protocol |
+| **Cross-model** | ❌ Claude only | ✅ Any model reads Markdown |
+| **Knowledge base** | ❌ | ✅ URL → summarize → synthesize |
+| **Learning from mistakes** | ❌ | ✅ 13-item review checklist + lessons accumulation |
+
+**When Claude Projects is enough**: You have 1-2 focused projects, don't switch between them, and don't need knowledge accumulation across sessions.
+
+**When you need this system**: You manage 3+ projects, need a "PM" to track everything, want knowledge to compound over time, or work across multiple AI platforms.
 
 ---
 

@@ -1,4 +1,4 @@
-# AI Personal Secretary — Template v0.4
+# AI Personal Secretary — Template v0.5
 
 > An AI personal secretary system template built on Claude Code / Cowork.
 > Fork it, tweak a few parameters, and you're good to go.
@@ -26,7 +26,7 @@ Skills are modular behavior packages that the secretary loads on demand. They li
 | Skill | What It Does | How to Trigger |
 |---|---|---|
 | **secretary** | Dual-mode operation, memory architecture, organization rhythm, INDEX routing, output control | Auto-loaded every session |
-| **review** | Two-stage wrap-up: project manager closes out → secretary reviews with 12-item checklist (experience extraction + system updates + memory sync) | Say **"wrap up"** |
+| **review** | Two-stage wrap-up: project manager closes out → secretary reviews with 13-item checklist (experience extraction + system updates + memory sync + synthesis correction) | Say **"wrap up"** |
 | **handoff** | Cross-session and cross-platform handoff protocol. Ensures zero information loss between sessions | Auto-loaded; runs at every session end |
 
 ### Project & Knowledge Skills
@@ -34,7 +34,8 @@ Skills are modular behavior packages that the secretary loads on demand. They li
 | Skill | What It Does | How to Trigger |
 |---|---|---|
 | **project-setup** | Six-step project launch flow: background → architecture → research → Debate → decision → execution. Includes branching logic for simple vs complex projects | Say **"start new project"** or **"open a project"** |
-| **knowledge-base** | Personal knowledge pipeline: paste a URL → auto-fetch → summarize → archive. Supports articles and YouTube. Bridges knowledge to projects via `kb-digest` | Share a **URL** in conversation, or say **"save this"** |
+| **knowledge-base** | Personal knowledge pipeline: paste a URL → auto-fetch → summarize → archive. Supports articles and YouTube. Includes synthesis layer (cross-article compiled knowledge), tiered search (L1→L2→L3), and periodic health checks. Bridges knowledge to projects via `kb-digest` | Share a **URL** in conversation, or say **"save this"** |
+| **github-recon** | Security reconnaissance for GitHub repos: 5-step SOP producing red/yellow/green light reports. Read-only, zero execution — builds risk picture before you clone/install | Auto-triggers when you paste a **github.com URL** |
 | **tool-scout** | Discover tools via MCP Registry, Plugin store, and GitHub. Includes security assessment checklist | Say **"find a tool for X"** or **"is there a plugin for X"** |
 | **debate-protocol** | Multi-round structured debate for high-stakes decisions. Advocate vs Challenger with word limits, secretary moderates | Triggered during **project-setup Step 4**, or say **"let's debate X"** |
 
@@ -59,11 +60,12 @@ your-project/
 ├── .claude/
 │   └── skills/
 │       ├── secretary/SKILL.md         ← Core secretary behavior
-│       ├── review/SKILL.md            ← Wrap-up Review (12-item checklist)
+│       ├── review/SKILL.md            ← Wrap-up Review (13-item checklist)
 │       ├── handoff/SKILL.md           ← Handoff protocol
 │       ├── project-setup/SKILL.md     ← Six-step project launch
 │       ├── knowledge-base/SKILL.md    ← Knowledge base pipeline
 │       ├── tool-scout/SKILL.md        ← Tool discovery + security
+│       ├── github-recon/SKILL.md      ← GitHub repo security recon
 │       ├── chrome-sop/SKILL.md        ← [Optional] Chrome SOP
 │       ├── gcp-ops/SKILL.md           ← [Optional] GCP SOP
 │       ├── github-ops/SKILL.md        ← [Optional] GitHub SOP
@@ -85,6 +87,8 @@ your-project/
 │   ├── knowledge-base/
 │   │   ├── articles/                  ← Saved articles
 │   │   ├── videos/                    ← Saved videos
+│   │   ├── synthesis/                 ← Cross-article compiled knowledge
+│   │   ├── health-check/             ← Periodic health check reports
 │   │   └── inbox/fetch-queue.md       ← Batch processing queue
 │   ├── summaries/
 │   │   ├── weekly/                    ← Weekly reports
@@ -93,8 +97,9 @@ your-project/
 │       ├── debate-agents/             ← Debate protocol + personas
 │       └── security-checklist.md      ← Tool security checklist
 ├── docs/
+│   ├── concept-guide.md               ← Start here: what & why (5 min read)
 │   ├── quickstart.md                  ← Quick start guide
-│   ├── faq.md                         ← FAQ (11 questions)
+│   ├── faq.md                         ← FAQ
 │   └── lessons-learned.md             ← 15 pitfalls + best practices
 └── README.md                          ← This file
 ```
@@ -161,12 +166,31 @@ High-stakes business decisions can trigger a Debate — inviting an Advocate and
 
 ## Getting Started
 
-1. Read `docs/quickstart.md` (5-minute quick start)
-2. Read `docs/BEGINNER-TIPS.md` (usage tips)
-3. Check `docs/faq.md` (common questions)
-4. Look up `docs/lessons-learned.md` when you hit issues (15 pitfalls)
+1. **New here?** Read `docs/concept-guide.md` first (5-minute overview of what this is and why)
+2. Read `docs/quickstart.md` (5-minute setup)
+3. Read `workspace/BEGINNER-TIPS.md` (usage tips)
+4. Check `docs/faq.md` (common questions)
+5. Look up `docs/lessons-learned.md` when you hit issues (15 pitfalls)
 
 ## Version History
+
+### v0.5 (2026-04-10)
+
+**Added**:
+- **github-recon Skill**: 5-step security reconnaissance SOP for GitHub repos (red/yellow/green light reports, dependency scanning, typosquat detection). Read-only, zero execution — builds risk picture before clone/install
+- **Synthesis layer** in knowledge-base Skill: cross-article compiled knowledge pages, single/batch ingest modes, synthesis correction digestion, milestone reviews every 100 articles
+- **Tiered search** (L1→L2→L3) in knowledge-base Skill: strict layered search to control token usage — search list → wiki entry → original, one level at a time
+- **Health check framework** in knowledge-base Skill: tag-driven periodic scans, cross-project correlation, knowledge gap detection
+- **Operation log** (log.md) and **wiki index maintenance** for knowledge base
+
+**Upgraded**:
+- **secretary Skill**: Added startup flow (scan handoff/pending), required-skills auto-loading in project mode, INDEX slimming principle (<150 lines + archive), expanded organization rhythm (daily review + 4 weekly sub-flows: KB health check, synthesis × project cross-insight, knowledge gap research delegation, synthesis correction digestion), general rules (Python for math, Cowork no git)
+- **review Skill**: 12 → 13-item checklist (added A5 Synthesis Correction detection), git save changed from naive auto-commit to platform-specific handling (Code: direct commit / Cowork: git-commit handoff)
+- **handoff Skill**: Added 4-step wrap-up SOP, Git Commit Handoff section (Cowork → Code), same-day merge rule, done/ 7-day cleanup recommendation, 12→13 item count sync
+- **CLAUDE.md**: Skills index updated with github-recon and enhanced knowledge-base description
+
+**Infrastructure**:
+- Added `workspace/knowledge-base/synthesis/` and `health-check/` directories
 
 ### v0.4 (2026-03-28)
 
@@ -223,7 +247,7 @@ This system was battle-tested through daily production use. Here are the top pit
 5. **Timestamps are mandatory in handoff reports**: Run `date` for time. Never use vague terms.
 6. **Debate needs word limits**: Opening 200-300 words, exchanges 100-150, max 3 topics.
 7. **Memory layering is critical**: memory.md (knowledge) vs INDEX.md (status) vs daily/ (events).
-8. **Review is for learning, not just logging**: The 12-item checklist ensures you capture lessons, not just events.
+8. **Review is for learning, not just logging**: The 13-item checklist ensures you capture lessons, not just events.
 9. **Bridge knowledge to action**: Saved articles must connect to projects via kb-digest, or they'll collect dust.
 10. **Control output size**: Default brief, confirm before expanding, one step at a time.
 
@@ -251,7 +275,7 @@ Questions, suggestions, or pitfalls to share?
 
 # 繁體中文
 
-# AI 個人秘書 — 模板 v0.4
+# AI 個人秘書 — 模板 v0.5
 
 > 一套基於 Claude Code / Cowork 的 AI 個人秘書系統模板。
 > Fork 後改幾個參數就能跑。
@@ -277,7 +301,7 @@ Skills 是模組化的行為套件，秘書按需載入。放在 `.claude/skills
 | Skill | 功能 | 觸發方式 |
 |---|---|---|
 | **secretary** | 雙模式運作、記憶架構、整理節奏、INDEX 寫入分流、輸出控制 | 每次自動載入 |
-| **review** | 兩階段收尾：專案經理收尾 → 秘書 Review（12 條檢查清單：經驗提煉 + 系統更新 + 記憶同步） | 說 **「收尾吧」** |
+| **review** | 兩階段收尾：專案經理收尾 → 秘書 Review（13 條檢查清單：經驗提煉 + 系統更新 + 記憶同步 + synthesis 修正偵測） | 說 **「收尾吧」** |
 | **handoff** | 跨 session 和跨平台交接協議，確保零資訊遺失 | 自動載入；每次 session 結束執行 |
 
 ### 專案與知識 Skills
@@ -285,7 +309,8 @@ Skills 是模組化的行為套件，秘書按需載入。放在 `.claude/skills
 | Skill | 功能 | 觸發方式 |
 |---|---|---|
 | **project-setup** | 六步開案流程：背景 → 架構 → 研究 → Debate → 拍板 → 執行。含簡單/複雜專案分流邏輯 | 說 **「開新專案」** |
-| **knowledge-base** | 個人知識管線：貼 URL → 自動抓取 → 摘要 → 存檔。支援文章和 YouTube。透過 `kb-digest` 橋接知識到專案 | 分享 **URL** 或說 **「存一下這個」** |
+| **knowledge-base** | 個人知識管線：貼 URL → 自動抓取 → 摘要 → 存檔。支援文章和 YouTube。含 Synthesis 層（跨文章編譯知識）、分層搜尋（L1→L2→L3）、定期健康檢查。透過 `kb-digest` 橋接知識到專案 | 分享 **URL** 或說 **「存一下這個」** |
+| **github-recon** | GitHub Repo 資安偵察：5 步 SOP 產出紅/黃/綠燈報告。純讀取零執行，在 clone/install 前先建立風險圖 | 貼 **github.com URL** 自動觸發 |
 | **tool-scout** | 透過 MCP Registry、Plugin 商店、GitHub 探索工具。含資安評估清單 | 說 **「幫我找 X 的工具」** |
 | **debate-protocol** | 高風險決策的多輪結構化辯論。Advocate vs Challenger，秘書主持 | **開案 Step 4** 觸發，或說 **「來辯論 X」** |
 
@@ -310,11 +335,12 @@ your-project/
 ├── .claude/
 │   └── skills/
 │       ├── secretary/SKILL.md         ← 秘書核心行為
-│       ├── review/SKILL.md            ← 收尾 Review（12 條檢查清單）
+│       ├── review/SKILL.md            ← 收尾 Review（13 條檢查清單）
 │       ├── handoff/SKILL.md           ← 交接協議
 │       ├── project-setup/SKILL.md     ← 六步開案流程
 │       ├── knowledge-base/SKILL.md    ← 知識庫管線
 │       ├── tool-scout/SKILL.md        ← 工具探索 + 資安
+│       ├── github-recon/SKILL.md      ← GitHub repo 資安偵察
 │       ├── chrome-sop/SKILL.md        ← [可選] Chrome SOP
 │       ├── gcp-ops/SKILL.md           ← [可選] GCP SOP
 │       ├── github-ops/SKILL.md        ← [可選] GitHub SOP
@@ -336,6 +362,8 @@ your-project/
 │   ├── knowledge-base/
 │   │   ├── articles/                  ← 存檔文章
 │   │   ├── videos/                    ← 存檔影片
+│   │   ├── synthesis/                 ← 跨文章編譯知識
+│   │   ├── health-check/             ← 定期健康檢查報告
 │   │   └── inbox/fetch-queue.md       ← 批次處理佇列
 │   ├── summaries/
 │   │   ├── weekly/                    ← 週報
@@ -344,8 +372,9 @@ your-project/
 │       ├── debate-agents/             ← Debate 協議 + 人設
 │       └── security-checklist.md      ← 工具資安清單
 ├── docs/
+│   ├── concept-guide.md               ← 從這裡開始：這是什麼、為什麼需要（5 分鐘）
 │   ├── quickstart.md                  ← 快速開始指南
-│   ├── faq.md                         ← FAQ（11 題）
+│   ├── faq.md                         ← FAQ
 │   └── lessons-learned.md             ← 15 個踩坑 + 最佳實踐
 └── README.md                          ← 本檔
 ```
@@ -412,12 +441,31 @@ your-project/
 
 ## 新手入門
 
-1. 讀 `docs/quickstart.md`（5 分鐘快速開始）
-2. 讀 `docs/BEGINNER-TIPS.md`（使用技巧）
-3. 看 `docs/faq.md`（常見問題 11 題）
-4. 遇到問題查 `docs/lessons-learned.md`（15 個踩坑紀錄）
+1. **第一次來？** 先讀 `docs/concept-guide.md`（5 分鐘了解這是什麼、為什麼需要）
+2. 讀 `docs/quickstart.md`（5 分鐘完成設定）
+3. 讀 `workspace/BEGINNER-TIPS.md`（使用技巧）
+4. 看 `docs/faq.md`（常見問題）
+5. 遇到問題查 `docs/lessons-learned.md`（15 個踩坑紀錄）
 
 ## 版本歷史
+
+### v0.5（2026-04-10）
+
+**新增**：
+- **github-recon Skill**：GitHub Repo 5 步資安偵察 SOP（紅/黃/綠燈報告、依賴掃描、typosquat 偵測）。純讀取零執行，clone/install 前先建立風險圖
+- **Synthesis 層**（knowledge-base Skill）：跨文章編譯知識頁、單篇/批量入庫模式、synthesis correction 消化、每 100 篇里程碑檢查
+- **分層搜尋** L1→L2→L3（knowledge-base Skill）：嚴格分層控制 token 用量——搜尋清單 → wiki 條目 → 原文，逐層下探
+- **健康檢查框架**（knowledge-base Skill）：標籤驅動定期掃描、跨專案關聯、知識缺口偵測
+- **操作紀錄** log.md 和 **Wiki 索引維護**
+
+**升級**：
+- **secretary Skill**：新增啟動流程（掃 handoff/pending）、專案模式 required-skills 自動載入、INDEX 瘦身原則（< 150 行 + 歸檔）、整理節奏擴充（每日 Review + 每週 4 子流程：KB 健康檢查、synthesis 交叉洞察、知識缺口研究委派、synthesis correction 消化）、通用守則（Python 算數字、Cowork 不做 git）
+- **review Skill**：12 → 13 條檢查清單（新增 A5 Synthesis Correction 偵測）、Git 存檔改平台分流（Code 直接 commit / Cowork 寫 git-commit handoff）
+- **handoff Skill**：新增 4 步收尾 SOP、Git Commit Handoff 段落（Cowork → Code）、同一天合併規則、done/ 7 天清理建議、12→13 條數字統一
+- **CLAUDE.md**：Skills 索引新增 github-recon 和 knowledge-base 描述更新
+
+**基礎設施**：
+- 新增 `workspace/knowledge-base/synthesis/` 和 `health-check/` 目錄
 
 ### v0.4（2026-03-28）
 
