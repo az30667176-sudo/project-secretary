@@ -30,17 +30,17 @@ export default function RootLayout({
         style={{ background: "var(--bg)", color: "var(--text-primary)" }}
       >
         <nav
-          className="sticky top-0 z-50 border-b"
+          className="sticky top-0 z-50 border-b w-full"
           style={{
             background: "rgba(12, 12, 12, 0.85)",
             backdropFilter: "blur(12px)",
             borderColor: "var(--border)",
           }}
         >
-          <div className="max-w-[860px] mx-auto px-6 h-16 flex items-center justify-between">
+          <div className="w-full max-w-[1000px] mx-auto px-8 md:px-12 h-16 flex items-center justify-between">
             <Link
               href="/"
-              className="font-[family-name:var(--font-playfair)] text-lg font-semibold tracking-tight"
+              className="font-[family-name:var(--font-playfair)] text-xl font-semibold tracking-tight"
               style={{ color: "var(--accent)" }}
             >
               Kurt Library
@@ -48,14 +48,14 @@ export default function RootLayout({
             <div className="flex items-center gap-8">
               <Link
                 href="/knowledge"
-                className="text-sm font-medium transition-colors hover:opacity-100"
+                className="text-base font-medium transition-colors hover:opacity-100"
                 style={{ color: "var(--text-secondary)" }}
               >
                 Articles
               </Link>
               <Link
                 href="/synthesis"
-                className="text-sm font-medium transition-colors hover:opacity-100"
+                className="text-base font-medium transition-colors hover:opacity-100"
                 style={{ color: "var(--text-secondary)" }}
               >
                 Insights
@@ -63,7 +63,9 @@ export default function RootLayout({
             </div>
           </div>
         </nav>
-        <main className="max-w-[860px] mx-auto px-6 py-10">{children}</main>
+        <main className="w-full max-w-[1000px] mx-auto px-8 md:px-12 py-12">
+          {children}
+        </main>
       </body>
     </html>
   );

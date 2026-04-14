@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import type { Article } from "@/types";
 
 const TAG_COLORS: Record<string, string> = {};
@@ -28,6 +28,13 @@ function estimateReadTime(content: string) {
   return Math.max(1, Math.round(words / 200));
 }
 
+const FONT_SCALES = [
+  { label: "S", value: 0.9 },
+  { label: "M", value: 1 },
+  { label: "L", value: 1.15 },
+  { label: "XL", value: 1.3 },
+];
+
 type SortKey = "newest" | "oldest" | "title";
 
 export function KnowledgePage({ articles }: { articles: Article[] }) {
@@ -35,6 +42,11 @@ export function KnowledgePage({ articles }: { articles: Article[] }) {
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
   const [selectedProject, setSelectedProject] = useState("");
   const [sort, setSort] = useState<SortKey>("newest");
+  const [fontScale, setFontScale] = useState(1);
+
+  useEffect(() => {
+    document.documentElement.style.setProperty("--font-scale", String(fontScale));
+  }, [fontScale]);
 
   const allTags = useMemo(() => {
     const set = new Set<string>();
@@ -89,11 +101,32 @@ export function KnowledgePage({ articles }: { articles: Article[] }) {
 
   return (
     <div>
-      {/* Stats */}
-      <div className="flex gap-6 mb-6 text-sm" style={{ color: "var(--text-muted)" }}>
-        <span>{articles.length} articles</span>
-        <span>{allTags.length} tags</span>
-        <span>{allProjects.length} projects</span>
+      {/* Header row: stats + font size */}
+      <div className="flex items-center justify-between mb-8">
+        <div className="flex gap-6 text-sm" style={{ color: "var(--text-muted)" }}>
+          <span>{articles.length} articles</span>
+          <span>{allTags.length} tags</span>
+          <span>{allProjects.length} projects</span>
+        </div>
+
+        {/* Font size control */}
+        <div className="flex items-center gap-1">
+          <span className="text-xs mr-2" style={{ color: "var(--text-muted)" }}>Aa</span>
+          {FONT_SCALES.map((s) => (
+            <button
+              key={s.label}
+              onClick={() => setFontScale(s.value)}
+              className="w-8 h-8 rounded-lg text-xs font-medium transition-all cursor-pointer"
+              style={{
+                background: fontScale === s.value ? "var(--accent)" : "transparent",
+                color: fontScale === s.value ? "#0c0c0c" : "var(--text-muted)",
+                border: `1px solid ${fontScale === s.value ? "var(--accent)" : "var(--border)"}`,
+              }}
+            >
+              {s.label}
+            </button>
+          ))}
+        </div>
       </div>
 
       {/* Search */}
@@ -102,18 +135,19 @@ export function KnowledgePage({ articles }: { articles: Article[] }) {
         placeholder="Search articles..."
         value={search}
         onChange={(e) => setSearch(e.target.value)}
-        className="w-full px-4 py-3 rounded-xl text-sm mb-5 outline-none transition-colors focus:ring-1"
+        className="w-full px-5 py-3.5 rounded-xl mb-6 outline-none transition-colors"
         style={{
           background: "var(--bg-card)",
           border: "1px solid var(--border)",
           color: "var(--text-primary)",
+          fontSize: "0.95rem",
         }}
       />
 
       {/* Filters row */}
-      <div className="flex flex-wrap items-center gap-3 mb-6">
+      <div className="flex flex-wrap items-center gap-3 mb-8">
         {/* Tags */}
-        <div className="flex flex-wrap gap-1.5">
+        <div className="flex flex-wrap gap-2">
           {allTags.map((tag) => {
             const colors = getTagColor(tag).split(",");
             const active = selectedTags.includes(tag);
@@ -121,7 +155,7 @@ export function KnowledgePage({ articles }: { articles: Article[] }) {
               <button
                 key={tag}
                 onClick={() => toggleTag(tag)}
-                className="px-2.5 py-1 rounded-full text-xs font-medium transition-all cursor-pointer"
+                className="px-3 py-1.5 rounded-full text-xs font-medium transition-all cursor-pointer"
                 style={{
                   background: active ? colors[0] : "transparent",
                   color: active ? colors[1] : "var(--text-muted)",
@@ -139,7 +173,7 @@ export function KnowledgePage({ articles }: { articles: Article[] }) {
           <select
             value={selectedProject}
             onChange={(e) => setSelectedProject(e.target.value)}
-            className="px-3 py-1.5 rounded-lg text-xs outline-none cursor-pointer"
+            className="px-3 py-2 rounded-lg text-sm outline-none cursor-pointer"
             style={{
               background: "var(--bg-card)",
               border: "1px solid var(--border)",
@@ -159,7 +193,7 @@ export function KnowledgePage({ articles }: { articles: Article[] }) {
         <select
           value={sort}
           onChange={(e) => setSort(e.target.value as SortKey)}
-          className="px-3 py-1.5 rounded-lg text-xs outline-none cursor-pointer ml-auto"
+          className="px-3 py-2 rounded-lg text-sm outline-none cursor-pointer ml-auto"
           style={{
             background: "var(--bg-card)",
             border: "1px solid var(--border)",
@@ -174,27 +208,37 @@ export function KnowledgePage({ articles }: { articles: Article[] }) {
 
       {/* Articles */}
       {filtered.length === 0 ? (
-        <div className="text-center py-16" style={{ color: "var(--text-muted)" }}>
-          <p className="text-lg mb-2">No articles yet</p>
-          <p className="text-sm">Share a URL in Claude Code to save your first article.</p>
+        <div className="text-center py-24" style={{ color: "var(--text-muted)" }}>
+          <p className="text-2xl mb-3 font-[family-name:var(--font-playfair)]" style={{ color: "var(--text-secondary)" }}>
+            No articles yet
+          </p>
+          <p className="text-base leading-relaxed">
+            Share a URL in Claude Code to save your first article.
+          </p>
         </div>
       ) : (
-        <div className="flex flex-col gap-4">
+        <div className="flex flex-col gap-5">
           {filtered.map((article) => (
             <article
               key={article.slug}
-              className="p-5 rounded-xl transition-colors"
+              className="p-6 rounded-2xl transition-colors"
               style={{
                 background: "var(--bg-card)",
                 border: "1px solid var(--border)",
               }}
             >
               <h2
-                className="text-xl font-semibold mb-2 font-[family-name:var(--font-playfair)]"
+                className="text-2xl font-semibold mb-3 leading-snug font-[family-name:var(--font-playfair)]"
                 style={{ color: "var(--text-primary)" }}
               >
                 {article.url ? (
-                  <a href={article.url} target="_blank" rel="noopener noreferrer" className="hover:underline">
+                  <a
+                    href={article.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="hover:underline underline-offset-4"
+                    style={{ textDecorationColor: "var(--accent)" }}
+                  >
                     {article.title}
                   </a>
                 ) : (
@@ -203,44 +247,49 @@ export function KnowledgePage({ articles }: { articles: Article[] }) {
               </h2>
 
               {article.summary && (
-                <p className="text-sm leading-relaxed mb-3" style={{ color: "var(--text-secondary)" }}>
-                  {article.summary.length > 200 ? article.summary.slice(0, 200) + "..." : article.summary}
+                <p
+                  className="leading-relaxed mb-4"
+                  style={{ color: "var(--text-secondary)", fontSize: "0.95rem" }}
+                >
+                  {article.summary.length > 280 ? article.summary.slice(0, 280) + "..." : article.summary}
                 </p>
               )}
 
-              <div className="flex flex-wrap items-center gap-2 text-xs" style={{ color: "var(--text-muted)" }}>
+              <div className="flex flex-wrap items-center gap-3 text-sm" style={{ color: "var(--text-muted)" }}>
                 <span>{article.date_saved}</span>
                 {article.source && (
                   <>
-                    <span>-</span>
+                    <span style={{ color: "var(--border)" }}>|</span>
                     <span>{article.source}</span>
                   </>
                 )}
-                <span>-</span>
+                <span style={{ color: "var(--border)" }}>|</span>
                 <span>{estimateReadTime(article.content)} min read</span>
 
-                {article.related_projects.map((p) => (
-                  <span
-                    key={p}
-                    className="px-2 py-0.5 rounded text-xs"
-                    style={{ background: "var(--border)", color: "var(--text-secondary)" }}
-                  >
-                    {p}
-                  </span>
-                ))}
-
-                {article.tags.map((tag) => {
-                  const colors = getTagColor(tag).split(",");
-                  return (
+                <div className="flex flex-wrap gap-2 ml-auto">
+                  {article.related_projects.map((p) => (
                     <span
-                      key={tag}
-                      className="px-2 py-0.5 rounded-full text-xs font-medium"
-                      style={{ background: colors[0], color: colors[1] }}
+                      key={p}
+                      className="px-2.5 py-1 rounded-lg text-xs font-medium"
+                      style={{ background: "var(--border)", color: "var(--text-secondary)" }}
                     >
-                      {tag}
+                      {p}
                     </span>
-                  );
-                })}
+                  ))}
+
+                  {article.tags.map((tag) => {
+                    const colors = getTagColor(tag).split(",");
+                    return (
+                      <span
+                        key={tag}
+                        className="px-2.5 py-1 rounded-full text-xs font-medium"
+                        style={{ background: colors[0], color: colors[1] }}
+                      >
+                        {tag}
+                      </span>
+                    );
+                  })}
+                </div>
               </div>
             </article>
           ))}

@@ -11,6 +11,7 @@
   --border-hover: #3a3a3a;
   --accent: #c9a55a;
   --accent-dim: #c9a55a22;
+  --font-scale: 1;
 }
 
 @theme inline {
@@ -33,9 +34,16 @@
   box-sizing: border-box;
 }
 
+html {
+  font-size: calc(16px * var(--font-scale));
+}
+
 body {
   background: var(--bg);
   color: var(--text-primary);
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 ::selection {
