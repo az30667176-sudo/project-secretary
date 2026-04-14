@@ -116,14 +116,6 @@ function ArticleCard({ article }: { article: Article }) {
 
       {/* Meta row */}
       <div className="flex flex-wrap items-center gap-2 text-xs" style={{ color: "var(--text-muted)" }}>
-        <span>{article.date_saved}</span>
-        {article.source && (
-          <>
-            <span style={{ color: "var(--border)" }}>|</span>
-            <span>{article.source}</span>
-          </>
-        )}
-        <span style={{ color: "var(--border)" }}>|</span>
         <span>{estimateReadTime(article.content)} min read</span>
 
         {!expanded && (
@@ -131,15 +123,36 @@ function ArticleCard({ article }: { article: Article }) {
         )}
 
         <div className="flex flex-wrap gap-1.5 ml-auto">
+          {/* Source chip */}
+          {article.source && (
+            <span
+              className="px-2 py-0.5 rounded-full text-xs font-medium"
+              style={{ background: "#1a2a1a", color: "#7dba7d" }}
+            >
+              {article.source}
+            </span>
+          )}
+
+          {/* Date chip */}
+          <span
+            className="px-2 py-0.5 rounded-full text-xs font-medium"
+            style={{ background: "#1a1a2a", color: "#8888cc" }}
+          >
+            {article.date_published || article.date_saved}
+          </span>
+
+          {/* Project chips */}
           {article.related_projects.map((p) => (
             <span
               key={p}
-              className="px-2 py-0.5 rounded-lg text-xs"
+              className="px-2 py-0.5 rounded-full text-xs font-medium"
               style={{ background: "var(--border)", color: "var(--text-secondary)" }}
             >
               {p}
             </span>
           ))}
+
+          {/* Tag chips */}
           {article.tags.map((tag) => {
             const colors = getTagColor(tag).split(",");
             return (
