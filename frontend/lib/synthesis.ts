@@ -21,7 +21,7 @@ export function getAllSyntheses(): Synthesis[] {
     return {
       slug: filename.replace(/\.md$/, ""),
       title: data.title ?? filename,
-      date_created: data.date_created ?? "",
+      date_created: String(data.date_created ?? ""),
       source_articles: data.source_articles ?? [],
       tags: data.tags ?? [],
       summary,
