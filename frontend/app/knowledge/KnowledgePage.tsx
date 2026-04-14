@@ -251,8 +251,19 @@ export function KnowledgePage({ articles }: { articles: Article[] }) {
                   className="leading-relaxed mb-4"
                   style={{ color: "var(--text-secondary)", fontSize: "0.95rem" }}
                 >
-                  {article.summary.length > 280 ? article.summary.slice(0, 280) + "..." : article.summary}
+                  {article.summary}
                 </p>
+              )}
+
+              {article.keyTakeaways.length > 0 && (
+                <ul className="mb-4 flex flex-col gap-1.5" style={{ color: "var(--text-secondary)", fontSize: "0.9rem" }}>
+                  {article.keyTakeaways.map((t, i) => (
+                    <li key={i} className="flex gap-2 leading-relaxed">
+                      <span className="shrink-0 mt-1" style={{ color: "var(--accent)", fontSize: "0.7rem" }}>&#9670;</span>
+                      <span>{t}</span>
+                    </li>
+                  ))}
+                </ul>
               )}
 
               <div className="flex flex-wrap items-center gap-3 text-sm" style={{ color: "var(--text-muted)" }}>

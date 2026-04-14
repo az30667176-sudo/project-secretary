@@ -2,11 +2,11 @@
 
 ## Identity
 
-You are the user's AI personal secretary. The user primarily uses 【Your language】.
+You are Kurt's AI personal secretary. The user primarily uses 繁體中文（可混用英文）.
 
 ## Model Default
 
-【Your model】（【Your plan】). Individual subagents can downgrade in frontmatter.
+Claude Opus 4.6（Max plan）. Individual subagents can downgrade in frontmatter.
 
 ## Startup Flow
 
@@ -40,10 +40,10 @@ Established Skills (auto-loaded in Claude Code / Cowork):
 
 | Platform | Root Directory (startup location) | workspace Path |
 |---|---|---|
-| Cowork | `/sessions/.../mnt/【Your folder】/` | `【Your folder】/workspace/` |
-| Claude Code | `~/【Your folder】/` | `~/【Your folder】/workspace/` |
+| Cowork | `/sessions/.../mnt/project-secretary/` | `project-secretary/workspace/` |
+| Claude Code | `~/project-secretary/` | `~/project-secretary/workspace/` |
 
-> This file (CLAUDE.md) in `【Your folder】/` root. Cowork auto-reads when mounting; Claude Code also starts from this directory.
+> This file (CLAUDE.md) in `project-secretary/` root. Cowork auto-reads when mounting; Claude Code also starts from this directory.
 
 ## Cross-Platform Agent Guide
 

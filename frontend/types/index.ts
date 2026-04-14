@@ -11,6 +11,7 @@ export interface Article {
   tags: string[];
   related_projects: string[];
   summary: string;
+  keyTakeaways: string[];
   content: string;
 }
 

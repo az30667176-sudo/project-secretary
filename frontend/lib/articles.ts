@@ -19,6 +19,12 @@ export function getAllArticles(): Article[] {
     const summaryMatch = content.match(/## Summary\s*\n([\s\S]*?)(?=\n## |$)/);
     const summary = summaryMatch ? summaryMatch[1].trim() : "";
 
+    // Extract key takeaways (## Key Takeaways section)
+    const takeawaysMatch = content.match(/## Key Takeaways\s*\n([\s\S]*?)(?=\n## |$)/);
+    const keyTakeaways = takeawaysMatch
+      ? takeawaysMatch[1].trim().split(/\n/).filter((l) => l.startsWith("- ")).map((l) => l.replace(/^- /, ""))
+      : [];
+
     return {
       slug: filename.replace(/\.md$/, ""),
       title: data.title ?? filename,
@@ -31,6 +37,7 @@ export function getAllArticles(): Article[] {
       tags: data.tags ?? [],
       related_projects: data.related_projects ?? [],
       summary,
+      keyTakeaways,
       content,
     };
   });
