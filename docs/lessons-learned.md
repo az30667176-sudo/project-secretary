@@ -466,6 +466,35 @@ Follow the Output Control Rules in secretary Skill:
 
 ---
 
+### Problem 16: gray-matter 日期解析導致 React render error (2026-04-14)
+
+**Symptoms**:
+- Next.js build 失敗，報錯 `Objects are not valid as a React child (found: [object Date])`
+- 只在有文章（含 frontmatter 日期欄位）時才發生
+
+**Root cause**:
+- `gray-matter` 自動將 `YYYY-MM-DD` 格式解析為 JavaScript Date 物件
+- Date 物件傳入 React 元件會報錯
+
+**Solution**:
+在 lib 層強制轉型：`String(data.date_saved ?? "")`
+
+**Best practice**:
+```
+□ 使用 gray-matter 時，所有日期欄位都用 String() 包裝
+□ 或在 frontmatter 中用引號包日期："2026-04-14"
+```
+
+---
+
+### Improvement: 文章卡片預覽/展開模式 (2026-04-14)
+
+**原本**: 所有文章摘要和 Key Takeaways 全部攤開顯示，資訊密度過高
+**改善**: 預設只顯示標題 + 摘要前 1-2 句，點擊才展開完整內容
+**效果**: 閱讀體驗大幅提升，瀏覽效率更好
+
+---
+
 ## Contribute Your Pitfalls
 
 Found new problems? Welcome to:
