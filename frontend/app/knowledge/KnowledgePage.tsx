@@ -5,14 +5,14 @@ import type { Article } from "@/types";
 
 const TAG_COLORS: Record<string, string> = {};
 const PALETTE = [
-  "#e0f2fe,#0369a1",
-  "#fce7f3,#be185d",
-  "#dcfce7,#15803d",
-  "#fef3c7,#b45309",
-  "#ede9fe,#6d28d9",
-  "#fee2e2,#b91c1c",
-  "#ccfbf1,#0f766e",
-  "#fae8ff,#a21caf",
+  "#0c3547,#5bb8d4",
+  "#3b1a2e,#d46b9e",
+  "#1a3324,#5bbf7a",
+  "#3a2a10,#d4a44e",
+  "#2a1f42,#a78bda",
+  "#3a1a1a,#d46b6b",
+  "#1a3333,#5bbfb8",
+  "#331a3a,#c47dda",
 ];
 
 function getTagColor(tag: string) {
@@ -102,7 +102,7 @@ export function KnowledgePage({ articles }: { articles: Article[] }) {
         placeholder="Search articles..."
         value={search}
         onChange={(e) => setSearch(e.target.value)}
-        className="w-full px-4 py-2.5 rounded-lg text-sm mb-4 outline-none transition-colors"
+        className="w-full px-4 py-3 rounded-xl text-sm mb-5 outline-none transition-colors focus:ring-1"
         style={{
           background: "var(--bg-card)",
           border: "1px solid var(--border)",

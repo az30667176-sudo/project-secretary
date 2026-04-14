@@ -1,35 +1,28 @@
 @import "tailwindcss";
 
 :root {
-  --bg: #fafafa;
-  --bg-card: #ffffff;
-  --text-primary: #111111;
-  --text-secondary: #444444;
-  --text-muted: #888888;
-  --border: #e5e5e5;
-  --border-hover: #cccccc;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg: #0a0a0a;
-    --bg-card: #161616;
-    --text-primary: #eeeeee;
-    --text-secondary: #b0b0b0;
-    --text-muted: #666666;
-    --border: #262626;
-    --border-hover: #404040;
-  }
+  --bg: #0c0c0c;
+  --bg-card: #1a1a1a;
+  --bg-elevated: #222222;
+  --text-primary: #e8e8e8;
+  --text-secondary: #a0a0a0;
+  --text-muted: #5a5a5a;
+  --border: #2a2a2a;
+  --border-hover: #3a3a3a;
+  --accent: #c9a55a;
+  --accent-dim: #c9a55a22;
 }
 
 @theme inline {
   --color-bg: var(--bg);
   --color-bg-card: var(--bg-card);
+  --color-bg-elevated: var(--bg-elevated);
   --color-text-primary: var(--text-primary);
   --color-text-secondary: var(--text-secondary);
   --color-text-muted: var(--text-muted);
   --color-border: var(--border);
   --color-border-hover: var(--border-hover);
+  --color-accent: var(--accent);
 }
 
 *,
@@ -43,4 +36,9 @@
 body {
   background: var(--bg);
   color: var(--text-primary);
+}
+
+::selection {
+  background: var(--accent-dim);
+  color: var(--accent);
 }

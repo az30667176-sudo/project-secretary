@@ -34,7 +34,7 @@ export function SynthesisPage({ syntheses }: { syntheses: Synthesis[] }) {
             </h2>
             <span
               className="shrink-0 px-2 py-0.5 rounded text-xs font-medium"
-              style={{ background: "#ede9fe", color: "#6d28d9" }}
+              style={{ background: "#2a1f42", color: "#a78bda" }}
             >
               AI Generated
             </span>

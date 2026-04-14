@@ -14,8 +14,8 @@ const playfair = Playfair_Display({
 });
 
 export const metadata: Metadata = {
-  title: "Knowledge Base",
-  description: "Personal knowledge base viewer",
+  title: "Kurt Library",
+  description: "Personal knowledge base",
 };
 
 export default function RootLayout({
@@ -30,33 +30,40 @@ export default function RootLayout({
         style={{ background: "var(--bg)", color: "var(--text-primary)" }}
       >
         <nav
-          className="sticky top-0 z-50 backdrop-blur-md border-b"
+          className="sticky top-0 z-50 border-b"
           style={{
-            background: "color-mix(in srgb, var(--bg) 80%, transparent)",
+            background: "rgba(12, 12, 12, 0.85)",
+            backdropFilter: "blur(12px)",
             borderColor: "var(--border)",
           }}
         >
-          <div className="max-w-[860px] mx-auto px-6 h-14 flex items-center gap-6">
-            <span className="font-semibold text-sm tracking-wide uppercase" style={{ color: "var(--text-muted)" }}>
-              KB
-            </span>
+          <div className="max-w-[860px] mx-auto px-6 h-16 flex items-center justify-between">
             <Link
-              href="/knowledge"
-              className="text-sm font-medium transition-colors hover:opacity-80"
-              style={{ color: "var(--text-primary)" }}
+              href="/"
+              className="font-[family-name:var(--font-playfair)] text-lg font-semibold tracking-tight"
+              style={{ color: "var(--accent)" }}
             >
-              Articles
+              Kurt Library
             </Link>
-            <Link
-              href="/synthesis"
-              className="text-sm font-medium transition-colors hover:opacity-80"
-              style={{ color: "var(--text-primary)" }}
-            >
-              Insights
-            </Link>
+            <div className="flex items-center gap-8">
+              <Link
+                href="/knowledge"
+                className="text-sm font-medium transition-colors hover:opacity-100"
+                style={{ color: "var(--text-secondary)" }}
+              >
+                Articles
+              </Link>
+              <Link
+                href="/synthesis"
+                className="text-sm font-medium transition-colors hover:opacity-100"
+                style={{ color: "var(--text-secondary)" }}
+              >
+                Insights
+              </Link>
+            </div>
           </div>
         </nav>
-        <main className="max-w-[860px] mx-auto px-6 py-8">{children}</main>
+        <main className="max-w-[860px] mx-auto px-6 py-10">{children}</main>
       </body>
     </html>
   );
