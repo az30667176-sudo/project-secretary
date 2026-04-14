@@ -9,6 +9,7 @@
 |---|---|---|---|
 | java-learning | UPenn MAS CS 課程 - Java 學習 | High | High |
 | investment-platform | 建構投資平台與策略 | High | High |
+| fundamental-portfolio | 基本面研究 → synthesis → 綜合投資評價 | Medium | High |
 | knowledge-base | 建構個人知識資料庫（Kurt Library） | Medium | Medium |
 
 ---

@@ -7,7 +7,7 @@ date_published: 2026-03-18
 language: zh-TW
 type: article
 tags: [AI, energy, utilities, IOU, infrastructure, fundamental-investment]
-related_projects: [investment-platform]
+related_projects: [fundamental-portfolio]
 ---
 
 # 用「公用事業」的價格買 AI 成長？不靠低買高賣？越建得多越賺得多？
