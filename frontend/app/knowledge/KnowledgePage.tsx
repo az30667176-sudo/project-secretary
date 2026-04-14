@@ -28,6 +28,15 @@ function estimateReadTime(content: string) {
   return Math.max(1, Math.round(words / 200));
 }
 
+function truncateSummary(text: string, maxLen = 120): string {
+  if (text.length <= maxLen) return text;
+  const cut = text.lastIndexOf("。", maxLen);
+  if (cut > 60) return text.slice(0, cut + 1);
+  const cut2 = text.lastIndexOf(".", maxLen);
+  if (cut2 > 60) return text.slice(0, cut2 + 1);
+  return text.slice(0, maxLen) + "...";
+}
+
 const FONT_SCALES = [
   { label: "S", value: 0.9 },
   { label: "M", value: 1 },
@@ -36,6 +45,118 @@ const FONT_SCALES = [
 ];
 
 type SortKey = "newest" | "oldest" | "title";
+
+function ArticleCard({ article }: { article: Article }) {
+  const [expanded, setExpanded] = useState(false);
+
+  return (
+    <article
+      className="p-6 rounded-2xl transition-all cursor-pointer"
+      style={{
+        background: "var(--bg-card)",
+        border: `1px solid ${expanded ? "var(--border-hover)" : "var(--border)"}`,
+      }}
+      onClick={() => setExpanded(!expanded)}
+    >
+      {/* Title */}
+      <h2
+        className="text-xl font-semibold mb-2 leading-snug font-[family-name:var(--font-playfair)]"
+        style={{ color: "var(--text-primary)" }}
+      >
+        {article.title}
+      </h2>
+
+      {/* Preview: truncated summary */}
+      {!expanded && article.summary && (
+        <p
+          className="leading-relaxed mb-3"
+          style={{ color: "var(--text-secondary)", fontSize: "0.9rem" }}
+        >
+          {truncateSummary(article.summary)}
+        </p>
+      )}
+
+      {/* Expanded: full summary + key takeaways */}
+      {expanded && (
+        <>
+          {article.summary && (
+            <p
+              className="leading-relaxed mb-4"
+              style={{ color: "var(--text-secondary)", fontSize: "0.9rem" }}
+            >
+              {article.summary}
+            </p>
+          )}
+
+          {article.keyTakeaways.length > 0 && (
+            <ul className="mb-4 flex flex-col gap-2" style={{ color: "var(--text-secondary)", fontSize: "0.85rem" }}>
+              {article.keyTakeaways.map((t, i) => (
+                <li key={i} className="flex gap-2 leading-relaxed">
+                  <span className="shrink-0 mt-0.5" style={{ color: "var(--accent)", fontSize: "0.65rem" }}>&#9670;</span>
+                  <span>{t}</span>
+                </li>
+              ))}
+            </ul>
+          )}
+
+          {article.url && (
+            <a
+              href={article.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-block text-xs font-medium mb-4 hover:underline"
+              style={{ color: "var(--accent)" }}
+              onClick={(e) => e.stopPropagation()}
+            >
+              View original &rarr;
+            </a>
+          )}
+        </>
+      )}
+
+      {/* Meta row */}
+      <div className="flex flex-wrap items-center gap-2 text-xs" style={{ color: "var(--text-muted)" }}>
+        <span>{article.date_saved}</span>
+        {article.source && (
+          <>
+            <span style={{ color: "var(--border)" }}>|</span>
+            <span>{article.source}</span>
+          </>
+        )}
+        <span style={{ color: "var(--border)" }}>|</span>
+        <span>{estimateReadTime(article.content)} min read</span>
+
+        {!expanded && (
+          <span className="ml-1" style={{ color: "var(--accent)", fontSize: "0.7rem" }}>&#9660; expand</span>
+        )}
+
+        <div className="flex flex-wrap gap-1.5 ml-auto">
+          {article.related_projects.map((p) => (
+            <span
+              key={p}
+              className="px-2 py-0.5 rounded-lg text-xs"
+              style={{ background: "var(--border)", color: "var(--text-secondary)" }}
+            >
+              {p}
+            </span>
+          ))}
+          {article.tags.map((tag) => {
+            const colors = getTagColor(tag).split(",");
+            return (
+              <span
+                key={tag}
+                className="px-2 py-0.5 rounded-full text-xs font-medium"
+                style={{ background: colors[0], color: colors[1] }}
+              >
+                {tag}
+              </span>
+            );
+          })}
+        </div>
+      </div>
+    </article>
+  );
+}
 
 export function KnowledgePage({ articles }: { articles: Article[] }) {
   const [search, setSearch] = useState("");
@@ -109,7 +230,6 @@ export function KnowledgePage({ articles }: { articles: Article[] }) {
           <span>{allProjects.length} projects</span>
         </div>
 
-        {/* Font size control */}
         <div className="flex items-center gap-1">
           <span className="text-xs mr-2" style={{ color: "var(--text-muted)" }}>Aa</span>
           {FONT_SCALES.map((s) => (
@@ -135,19 +255,18 @@ export function KnowledgePage({ articles }: { articles: Article[] }) {
         placeholder="Search articles..."
         value={search}
         onChange={(e) => setSearch(e.target.value)}
-        className="w-full px-5 py-3.5 rounded-xl mb-6 outline-none transition-colors"
+        className="w-full px-5 py-3 rounded-xl mb-5 outline-none transition-colors"
         style={{
           background: "var(--bg-card)",
           border: "1px solid var(--border)",
           color: "var(--text-primary)",
-          fontSize: "0.95rem",
+          fontSize: "0.9rem",
         }}
       />
 
       {/* Filters row */}
-      <div className="flex flex-wrap items-center gap-3 mb-8">
-        {/* Tags */}
-        <div className="flex flex-wrap gap-2">
+      <div className="flex flex-wrap items-center gap-2 mb-8">
+        <div className="flex flex-wrap gap-1.5">
           {allTags.map((tag) => {
             const colors = getTagColor(tag).split(",");
             const active = selectedTags.includes(tag);
@@ -155,7 +274,7 @@ export function KnowledgePage({ articles }: { articles: Article[] }) {
               <button
                 key={tag}
                 onClick={() => toggleTag(tag)}
-                className="px-3 py-1.5 rounded-full text-xs font-medium transition-all cursor-pointer"
+                className="px-2.5 py-1 rounded-full text-xs font-medium transition-all cursor-pointer"
                 style={{
                   background: active ? colors[0] : "transparent",
                   color: active ? colors[1] : "var(--text-muted)",
@@ -168,12 +287,11 @@ export function KnowledgePage({ articles }: { articles: Article[] }) {
           })}
         </div>
 
-        {/* Project dropdown */}
         {allProjects.length > 0 && (
           <select
             value={selectedProject}
             onChange={(e) => setSelectedProject(e.target.value)}
-            className="px-3 py-2 rounded-lg text-sm outline-none cursor-pointer"
+            className="px-3 py-1.5 rounded-lg text-xs outline-none cursor-pointer"
             style={{
               background: "var(--bg-card)",
               border: "1px solid var(--border)",
@@ -189,11 +307,10 @@ export function KnowledgePage({ articles }: { articles: Article[] }) {
           </select>
         )}
 
-        {/* Sort */}
         <select
           value={sort}
           onChange={(e) => setSort(e.target.value as SortKey)}
-          className="px-3 py-2 rounded-lg text-sm outline-none cursor-pointer ml-auto"
+          className="px-3 py-1.5 rounded-lg text-xs outline-none cursor-pointer ml-auto"
           style={{
             background: "var(--bg-card)",
             border: "1px solid var(--border)",
@@ -217,92 +334,9 @@ export function KnowledgePage({ articles }: { articles: Article[] }) {
           </p>
         </div>
       ) : (
-        <div className="flex flex-col gap-5">
+        <div className="flex flex-col gap-4">
           {filtered.map((article) => (
-            <article
-              key={article.slug}
-              className="p-6 rounded-2xl transition-colors"
-              style={{
-                background: "var(--bg-card)",
-                border: "1px solid var(--border)",
-              }}
-            >
-              <h2
-                className="text-2xl font-semibold mb-3 leading-snug font-[family-name:var(--font-playfair)]"
-                style={{ color: "var(--text-primary)" }}
-              >
-                {article.url ? (
-                  <a
-                    href={article.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="hover:underline underline-offset-4"
-                    style={{ textDecorationColor: "var(--accent)" }}
-                  >
-                    {article.title}
-                  </a>
-                ) : (
-                  article.title
-                )}
-              </h2>
-
-              {article.summary && (
-                <p
-                  className="leading-relaxed mb-4"
-                  style={{ color: "var(--text-secondary)", fontSize: "0.95rem" }}
-                >
-                  {article.summary}
-                </p>
-              )}
-
-              {article.keyTakeaways.length > 0 && (
-                <ul className="mb-4 flex flex-col gap-1.5" style={{ color: "var(--text-secondary)", fontSize: "0.9rem" }}>
-                  {article.keyTakeaways.map((t, i) => (
-                    <li key={i} className="flex gap-2 leading-relaxed">
-                      <span className="shrink-0 mt-1" style={{ color: "var(--accent)", fontSize: "0.7rem" }}>&#9670;</span>
-                      <span>{t}</span>
-                    </li>
-                  ))}
-                </ul>
-              )}
-
-              <div className="flex flex-wrap items-center gap-3 text-sm" style={{ color: "var(--text-muted)" }}>
-                <span>{article.date_saved}</span>
-                {article.source && (
-                  <>
-                    <span style={{ color: "var(--border)" }}>|</span>
-                    <span>{article.source}</span>
-                  </>
-                )}
-                <span style={{ color: "var(--border)" }}>|</span>
-                <span>{estimateReadTime(article.content)} min read</span>
-
-                <div className="flex flex-wrap gap-2 ml-auto">
-                  {article.related_projects.map((p) => (
-                    <span
-                      key={p}
-                      className="px-2.5 py-1 rounded-lg text-xs font-medium"
-                      style={{ background: "var(--border)", color: "var(--text-secondary)" }}
-                    >
-                      {p}
-                    </span>
-                  ))}
-
-                  {article.tags.map((tag) => {
-                    const colors = getTagColor(tag).split(",");
-                    return (
-                      <span
-                        key={tag}
-                        className="px-2.5 py-1 rounded-full text-xs font-medium"
-                        style={{ background: colors[0], color: colors[1] }}
-                      >
-                        {tag}
-                      </span>
-                    );
-                  })}
-                </div>
-              </div>
-            </article>
+            <ArticleCard key={article.slug} article={article} />
           ))}
         </div>
       )}
