@@ -1,6 +1,6 @@
 ---
 title: "核能復興應該買甚麼？獨立發電商如何分析？"
-url: "https://fomosoc.substack.com/p/ai-42"
+url: "https://fomosoc.substack.com/p/42cegvsttlnoklo"
 source: "FOMO研究院電子報"
 date_saved: 2026-04-14
 date_published: 2026-04-08
