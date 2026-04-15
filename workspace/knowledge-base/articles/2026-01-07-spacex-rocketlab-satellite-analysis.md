@@ -1,6 +1,6 @@
 ---
 title: "為何SpaceX追求更大的星艦？而 Rocket Lab能以小博大？"
-url: ""
+url: "https://fomosoc.substack.com/p/spacex-rocket-lab-29spacexrocketlab"
 source: "FOMO研究院電子報"
 date_saved: 2026-04-14
 date_published: 2026-01-07
