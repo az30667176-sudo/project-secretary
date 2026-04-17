@@ -37,7 +37,7 @@ export default function RootLayout({
             borderColor: "var(--border)",
           }}
         >
-          <div className="max-w-[1400px] mx-auto w-full px-8 sm:px-16 lg:px-24 h-16 flex items-center justify-between">
+          <div className="max-w-[1200px] mx-auto w-full px-10 sm:px-20 lg:px-32 h-16 flex items-center justify-between">
             <Link
               href="/"
               className="font-[family-name:var(--font-playfair)] text-xl font-semibold tracking-tight"
@@ -63,7 +63,7 @@ export default function RootLayout({
             </div>
           </div>
         </nav>
-        <main className="max-w-[1400px] mx-auto w-full px-8 sm:px-16 lg:px-24 py-12">
+        <main className="max-w-[1200px] mx-auto w-full px-10 sm:px-20 lg:px-32 py-12">
           {children}
         </main>
       </body>
