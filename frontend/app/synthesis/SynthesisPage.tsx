@@ -1,6 +1,8 @@
 "use client";
 
 import { useState } from "react";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 import type { Synthesis } from "@/types";
 
 function FreshnessBadge({ s }: { s: Synthesis }) {
@@ -30,111 +32,139 @@ function FreshnessBadge({ s }: { s: Synthesis }) {
   );
 }
 
+function stripSummarySection(content: string): string {
+  // Remove the Summary section (since we display it separately above)
+  return content.replace(/##\s*Summary\s*\n[\s\S]*?(?=\n##\s)/, "");
+}
+
 function SynthesisCard({ s }: { s: Synthesis }) {
   const [expanded, setExpanded] = useState(false);
 
   return (
     <article
-      className="p-6 rounded-2xl transition-all cursor-pointer"
+      className="rounded-2xl transition-all"
       style={{
         background: "var(--bg-card)",
         border: `1px solid ${expanded ? "var(--border-hover)" : "var(--border)"}`,
       }}
-      onClick={() => setExpanded(!expanded)}
     >
-      {/* Header */}
-      <div className="flex items-start justify-between gap-3 mb-3">
-        <h2
-          className="text-xl font-semibold leading-snug font-[family-name:var(--font-playfair)]"
-          style={{ color: "var(--text-primary)" }}
-        >
-          {s.title}
-        </h2>
-        <div className="flex flex-col gap-1 items-end shrink-0">
-          <span
-            className="px-2 py-0.5 rounded text-xs font-medium"
-            style={{ background: "#2a1f42", color: "#a78bda" }}
+      {/* Clickable header area */}
+      <div
+        className="p-6 cursor-pointer"
+        onClick={() => setExpanded(!expanded)}
+      >
+        {/* Header */}
+        <div className="flex items-start justify-between gap-3 mb-3">
+          <h2
+            className="text-2xl font-semibold leading-snug font-[family-name:var(--font-playfair)]"
+            style={{ color: "var(--text-primary)" }}
           >
-            Synthesis
-          </span>
-          <FreshnessBadge s={s} />
-        </div>
-      </div>
-
-      {/* Summary */}
-      {s.summary && (
-        <p
-          className="leading-relaxed mb-4"
-          style={{ color: "var(--text-secondary)", fontSize: expanded ? "0.95rem" : "0.9rem" }}
-        >
-          {expanded ? s.summary : s.summary.length > 200 ? s.summary.slice(0, 200) + "..." : s.summary}
-        </p>
-      )}
-
-      {/* Source Articles with dates */}
-      {s.source_articles.length > 0 && (
-        <div className="mb-4">
-          <div className="text-xs mb-2 font-medium" style={{ color: "var(--text-muted)" }}>
-            來源文章 ({s.source_articles.length}) · {s.oldest_source_date} ~ {s.newest_source_date}
+            {s.title}
+          </h2>
+          <div className="flex flex-col gap-1 items-end shrink-0">
+            <span
+              className="px-2 py-0.5 rounded text-xs font-medium"
+              style={{ background: "#2a1f42", color: "#a78bda" }}
+            >
+              Synthesis
+            </span>
+            <FreshnessBadge s={s} />
           </div>
-          <div className="flex flex-col gap-1.5">
-            {s.source_articles.map((src) => (
-              <a
-                key={src.slug}
-                href={src.url || undefined}
-                target={src.url ? "_blank" : undefined}
-                rel="noopener noreferrer"
-                onClick={(e) => e.stopPropagation()}
-                className="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs transition-colors hover:opacity-80"
+        </div>
+
+        {/* Summary */}
+        {s.summary && (
+          <p
+            className="leading-relaxed mb-4"
+            style={{ color: "var(--text-secondary)", fontSize: "0.95rem" }}
+          >
+            {s.summary}
+          </p>
+        )}
+
+        {/* Source Articles with dates */}
+        {s.source_articles.length > 0 && (
+          <div className="mb-4">
+            <div className="text-xs mb-2 font-medium" style={{ color: "var(--text-muted)" }}>
+              來源文章 ({s.source_articles.length}) · {s.oldest_source_date} ~ {s.newest_source_date}
+            </div>
+            <div className="flex flex-col gap-1.5">
+              {s.source_articles.map((src) => (
+                <a
+                  key={src.slug}
+                  href={src.url || undefined}
+                  target={src.url ? "_blank" : undefined}
+                  rel="noopener noreferrer"
+                  onClick={(e) => e.stopPropagation()}
+                  className="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs transition-colors hover:opacity-80"
+                  style={{
+                    background: "var(--bg)",
+                    border: "1px solid var(--border)",
+                    color: "var(--text-secondary)",
+                  }}
+                >
+                  <span
+                    className="px-1.5 py-0.5 rounded text-xs shrink-0 font-mono"
+                    style={{ background: "#1a1a2a", color: "#8888cc" }}
+                  >
+                    {src.date_published}
+                  </span>
+                  <span className="truncate">{src.title}</span>
+                  {src.source && (
+                    <span className="ml-auto shrink-0" style={{ color: "var(--text-muted)" }}>
+                      {src.source}
+                    </span>
+                  )}
+                </a>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* Meta row */}
+        <div className="flex flex-wrap items-center gap-2 text-xs" style={{ color: "var(--text-muted)" }}>
+          <span>Created: {s.date_created}</span>
+          <span style={{ color: "var(--border)" }}>|</span>
+          <span>Window: {s.freshness_window_days}d</span>
+
+          <span
+            className="ml-1 font-medium"
+            style={{ color: "var(--accent)", fontSize: "0.75rem" }}
+          >
+            {expanded ? "▲ collapse" : "▼ read full analysis"}
+          </span>
+
+          <div className="flex flex-wrap gap-1.5 ml-auto">
+            {s.tags.map((tag) => (
+              <span
+                key={tag}
+                className="px-2 py-0.5 rounded-full text-xs"
                 style={{
-                  background: "var(--bg)",
-                  border: "1px solid var(--border)",
-                  color: "var(--text-secondary)",
+                  background: "#2a1f42",
+                  color: "#a78bda",
                 }}
               >
-                <span
-                  className="px-1.5 py-0.5 rounded text-xs shrink-0"
-                  style={{ background: "#1a1a2a", color: "#8888cc" }}
-                >
-                  {src.date_published}
-                </span>
-                <span className="truncate">{src.title}</span>
-                {src.source && (
-                  <span className="ml-auto shrink-0" style={{ color: "var(--text-muted)" }}>
-                    {src.source}
-                  </span>
-                )}
-              </a>
+                {tag}
+              </span>
             ))}
           </div>
         </div>
-      )}
-
-      {/* Meta row */}
-      <div className="flex flex-wrap items-center gap-2 text-xs" style={{ color: "var(--text-muted)" }}>
-        <span>Created: {s.date_created}</span>
-        <span style={{ color: "var(--border)" }}>|</span>
-        <span>Freshness window: {s.freshness_window_days}d</span>
-
-        {!expanded && (
-          <span className="ml-1" style={{ color: "var(--accent)", fontSize: "0.7rem" }}>▼ expand</span>
-        )}
-
-        <div className="flex flex-wrap gap-1.5 ml-auto">
-          {s.tags.map((tag) => (
-            <span
-              key={tag}
-              className="px-2 py-0.5 rounded-full text-xs"
-              style={{
-                background: "#2a1f42",
-                color: "#a78bda",
-              }}
-            >
-              {tag}
-            </span>
-          ))}
-        </div>
       </div>
+
+      {/* Expanded markdown content */}
+      {expanded && (
+        <div
+          className="px-6 pb-6 pt-2 markdown-body"
+          style={{
+            borderTop: "1px solid var(--border)",
+            color: "var(--text-primary)",
+          }}
+        >
+          <ReactMarkdown remarkPlugins={[remarkGfm]}>
+            {stripSummarySection(s.content)}
+          </ReactMarkdown>
+        </div>
+      )}
     </article>
   );
 }
