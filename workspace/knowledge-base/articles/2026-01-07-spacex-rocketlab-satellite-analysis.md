@@ -7,7 +7,7 @@ date_published: 2026-01-07
 language: zh-TW
 type: article
 tags: [space, SpaceX, RocketLab, satellite, fundamental-investment, RKLB]
-related_projects: [fundamental-portfolio]
+related_projects: [kurt-library]
 ---
 
 # 為何SpaceX追求更大的星艦？而 Rocket Lab能以小博大？- 深入分析第29期

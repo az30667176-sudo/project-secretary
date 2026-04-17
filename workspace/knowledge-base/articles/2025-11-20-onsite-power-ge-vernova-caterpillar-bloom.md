@@ -7,7 +7,7 @@ date_published: 2025-11-20
 language: zh-TW
 type: article
 tags: [AI, energy, onsite-power, GE-Vernova, Caterpillar, Bloom-Energy, fundamental-investment]
-related_projects: [fundamental-portfolio]
+related_projects: [kurt-library]
 ---
 
 # 算力盡頭是電力，現場發電是解方嗎？- 深入分析第21期

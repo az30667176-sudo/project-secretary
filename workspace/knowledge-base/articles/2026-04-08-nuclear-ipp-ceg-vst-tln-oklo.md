@@ -7,7 +7,7 @@ date_published: 2026-04-08
 language: zh-TW
 type: article
 tags: [AI, energy, nuclear, IPP, fundamental-investment, CEG, VST, TLN, OKLO]
-related_projects: [fundamental-portfolio]
+related_projects: [kurt-library]
 ---
 
 # 核能復興應該買甚麼？獨立發電商如何分析？- 深入分析第42期（電力系列下集）

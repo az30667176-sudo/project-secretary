@@ -7,7 +7,7 @@ date_published: 2026-01-21
 language: zh-TW
 type: article
 tags: [AI, energy, BESS, Tesla, Fluence, infrastructure, fundamental-investment]
-related_projects: [fundamental-portfolio]
+related_projects: [kurt-library]
 ---
 
 # 買時間、繞監管、賺價差：為什麼儲能BESS將會成為標配？- 深入分析第31期
