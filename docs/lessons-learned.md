@@ -495,6 +495,98 @@ Follow the Output Control Rules in secretary Skill:
 
 ---
 
+### Pitfall: Synthesis 卡片只渲染 Summary 區段 (2026-04-17)
+
+**Symptoms**:
+- 改寫 synthesis 後用戶看不到新內容，以為 synthesis 沒更新
+- 實際上內容都在 markdown 的 ## 章節裡，前端沒渲染
+
+**Root cause**:
+- SynthesisPage 組件只顯示 frontmatter + summary 文字，沒有 markdown renderer
+- 所有 `## 真相 1`、表格、列點都被忽略
+
+**Solution**:
+- 安裝 `react-markdown` + `remark-gfm`（for GFM tables）
+- 展開時用 ReactMarkdown 渲染完整 content（排除已顯示的 Summary 區段）
+- 在 globals.css 加 `.markdown-body` 樣式匹配深色主題
+
+**Best practice**:
+```
+□ 任何含有結構化內容（## 章節、表格、列點）的 markdown 卡片
+  一定要有 markdown renderer，不能只用 <p>{content}</p>
+□ 預覽模式 vs 展開模式區分好，避免卡片過長
+```
+
+---
+
+### Principle: Synthesis 必須自成體系 (2026-04-17)
+
+**原則**: Kurt Library 的 synthesis **不能引用其他系統的資料**（insights-hub / Momentum Portal / 其他專案 outputs）。
+
+**Why**:
+- Kurt Library 的讀者只看得到 Articles 和 Insights 兩個頁面
+- 若 synthesis 引用網站讀者無權限的資料，就無法獨立理解
+- 跨系統整合屬於 insights-hub 的職責，不是 Kurt Library
+
+**How to apply**:
+- 寫 synthesis 時自問：「朋友只訪問 project-secretary.vercel.app 能理解嗎？」
+- 若需要跨系統資料 → 放到 insights-hub 的 reports/，不要放到 knowledge-base/synthesis/
+- 具體規則寫在 `workspace/projects/kurt-library/INDEX.md` 的「Synthesis 寫作規則」章節
+
+**Architectural lesson**: 三層架構職責分工
+- **Kurt Library synthesis** = 純基本面、純文章
+- **insights-hub reports** = 跨專案整合（內部）
+- **investment-platform outputs** = 量化訊號
+
+混合會破壞每個系統的可理解性。
+
+---
+
+### Improvement: Hub-and-Spoke 跨專案整合架構 (2026-04-16)
+
+**Context**: 需要把多個專案的 insight 整合產出綜合投資評價，且未來可能新增 source 專案。
+
+**Design**:
+```
+insights-hub (樞紐) ← outputs/ ← 各 source 專案
+                 → reports/ → refs/hub-reports/ 分發回各 source
+```
+
+**Key principles**:
+1. **標準 signal 格式**：每個 source 專案產出 `outputs/{type}-signals.md`（固定 schema）
+2. **訂閱路由表**：`insights-hub/sources.md` 是新專案加入的唯一登記點
+3. **分發機制**：報告完成後自動在貢獻專案的 `refs/hub-reports/` 放摘要 + 原報告連結
+
+**Why this works**:
+- 新 source 專案加入時，樞紐本身不用改
+- 單一方法論（memory.md）管理跨 source 的 weighting 與衝突解法
+- source 專案進入 Project Mode 時能看到自己貢獻了哪些報告
+
+---
+
+### Gotcha: 新 Claude Code session 必須在 project-secretary 目錄啟動 (2026-04-17)
+
+**Symptoms**:
+- 在 Projects 根目錄啟動 Claude Code，找不到 kurt-library 專案
+- 另一個 session 誤存「從今天起管理 kurt-library 專案」到 memory，之後帶壞所有對話
+- 在 all-weather-usStock-portal 啟動則只能看到該專案本身
+
+**Root cause**: Claude Code 啟動時讀取當前目錄的 CLAUDE.md。若不在 project-secretary 根目錄，秘書系統完全未載入。
+
+**Solution**:
+```bash
+# 永遠從這裡啟動
+cd C:/Users/az306/OneDrive/Desktop/Projects/project-secretary
+claude
+```
+
+**Best practice**:
+- 建立 PowerShell 別名或桌面捷徑指向正確目錄
+- 若發現 session 找不到專案清單 → 立刻退出，重新在正確目錄啟動
+- 若不小心儲存了錯誤的 memory → 要該 session「忘記關於 XX 的記憶」
+
+---
+
 ## Contribute Your Pitfalls
 
 Found new problems? Welcome to:
