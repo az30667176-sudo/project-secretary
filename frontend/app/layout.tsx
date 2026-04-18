@@ -26,18 +26,18 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${dmSans.variable} ${playfair.variable}`}>
       <body
-        className="min-h-screen font-[family-name:var(--font-dm-sans)]"
+        className="min-h-screen font-[family-name:var(--font-dm-sans)] flex flex-col items-center"
         style={{ background: "var(--bg)", color: "var(--text-primary)" }}
       >
         <nav
-          className="sticky top-0 z-50 border-b w-full"
+          className="sticky top-0 z-50 border-b w-full flex justify-center"
           style={{
             background: "rgba(12, 12, 12, 0.85)",
             backdropFilter: "blur(12px)",
             borderColor: "var(--border)",
           }}
         >
-          <div className="max-w-[900px] mx-auto w-full px-6 sm:px-10 h-16 flex items-center justify-between">
+          <div className="w-full max-w-[820px] px-6 sm:px-8 h-16 flex items-center justify-between">
             <Link
               href="/"
               className="font-[family-name:var(--font-playfair)] text-xl font-semibold tracking-tight"
@@ -63,7 +63,10 @@ export default function RootLayout({
             </div>
           </div>
         </nav>
-        <main className="max-w-[900px] mx-auto w-full px-6 sm:px-10 py-12">
+        <main
+          className="w-full max-w-[820px] px-6 sm:px-8 py-12"
+          style={{ marginLeft: "auto", marginRight: "auto" }}
+        >
           {children}
         </main>
       </body>
