@@ -1,7 +1,7 @@
 # AI Secretary - Main Index
 
 > This file is the core index of the secretary system, read first every session.
-> Last updated: 2026-04-17
+> Last updated: 2026-04-18
 
 ## Active Projects
 
@@ -10,7 +10,8 @@
 | java-learning | UPenn MAS CS 課程 - Java 學習 | High | High |
 | investment-platform | Momentum Portal - S&P 1500 動能研究平台（量化 source） | High | High |
 | kurt-library | 知識庫 + 前端 Kurt Library（基本面 source） | High | High |
-| insights-hub | 跨專案 insight 整合樞紐（訂閱上述兩個專案 signal） | High | High |
+| kronos-filter | Kronos 基礎模型機率性預測工具（機率 source，新建） | High | High |
+| insights-hub | 跨專案 insight 整合樞紐（訂閱三個 source 專案） | High | High |
 
 ---
 
@@ -20,7 +21,8 @@
 insights-hub (樞紐)
     ↑ 訂閱
     ├── kurt-library/outputs/fundamental-signals.md
-    └── investment-platform/outputs/quantitative-signals.md
+    ├── investment-platform/outputs/quantitative-signals.md
+    └── kronos-filter/outputs/kronos-signals.md（規劃中）
     ↓ 產出整合報告
     └── reports/ → 摘要回流到各 source 的 refs/hub-reports/
 ```
@@ -34,6 +36,8 @@ insights-hub (樞紐)
 
 ## Recent Priority Items
 
+- 2026-04-18: kronos-filter MVP 完成！10 tickers 測試通過，前端部署到 kronos-filter.vercel.app，export_to_hub 自動化
+- 2026-04-18: 建立第五個專案 kronos-filter（Kronos 機率性預測工具），進入 Step 1 讀 repo 階段
 - 2026-04-17: Synthesis 規則正式化（不引用外部系統資料），寫進 kurt-library INDEX
 - 2026-04-17: Frontend 加入 react-markdown 渲染 + layout 調整（max-w 1200px, 加大 padding）
 - 2026-04-16: 產出第一篇 Kurt Library synthesis「AI 電力投資的七個反直覺真相」
