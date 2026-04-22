@@ -2,7 +2,7 @@
 
 import { useState, useMemo, useEffect } from "react";
 import type { Article } from "@/types";
-import { dateKey } from "@/lib/articles";
+import { dateKey } from "@/lib/dateKey";
 
 const TAG_COLORS: Record<string, string> = {};
 const PALETTE = [

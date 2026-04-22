@@ -2,23 +2,9 @@ import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
 import type { Article } from "@/types";
+import { dateKey } from "./dateKey";
 
 const articlesDir = path.join(process.cwd(), "..", "workspace", "knowledge-base", "articles");
-
-/**
- * Build a sortable date key from an article.
- * Prefers `date_published` (the article's own time tag); falls back to
- * `date_saved`. Partial dates like "2026-04" or "2026" are normalized
- * to mid-month/mid-year so they don't unfairly land at start or end.
- */
-export function dateKey(article: Pick<Article, "date_published" | "date_saved">): string {
-  const d = article.date_published || article.date_saved || "";
-  const parts = d.split("-");
-  const yy = (parts[0] || "0000").padStart(4, "0");
-  const mm = (parts[1] || "06").padStart(2, "0");
-  const dd = (parts[2] || "15").padStart(2, "0");
-  return `${yy}-${mm}-${dd}`;
-}
 
 export function getAllArticles(): Article[] {
   if (!fs.existsSync(articlesDir)) return [];
