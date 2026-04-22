@@ -6,6 +6,21 @@ import { dateKey } from "./dateKey";
 
 const articlesDir = path.join(process.cwd(), "..", "workspace", "knowledge-base", "articles");
 
+/**
+ * Normalize a YAML-parsed date value to a YYYY-MM-DD string.
+ * gray-matter parses unquoted `2026-04-15` in frontmatter as a JS Date
+ * object; calling `String()` on it yields "Wed Apr 15 2026 00:00:00 GMT+0000",
+ * which breaks lexicographic sort. Strings (including partial dates like
+ * "2026-04") are returned as-is.
+ */
+function normalizeDate(v: unknown): string {
+  if (v == null) return "";
+  if (v instanceof Date && !isNaN(v.getTime())) {
+    return v.toISOString().slice(0, 10);
+  }
+  return String(v);
+}
+
 export function getAllArticles(): Article[] {
   if (!fs.existsSync(articlesDir)) return [];
 
@@ -31,8 +46,8 @@ export function getAllArticles(): Article[] {
       title: data.title ?? filename,
       url: data.url ?? "",
       source: data.source ?? "",
-      date_saved: String(data.date_saved ?? ""),
-      date_published: String(data.date_published ?? ""),
+      date_saved: normalizeDate(data.date_saved),
+      date_published: normalizeDate(data.date_published),
       language: data.language ?? "",
       type: data.type ?? "article",
       tags: data.tags ?? [],
