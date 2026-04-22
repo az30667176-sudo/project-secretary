@@ -2,6 +2,7 @@
 
 import { useState, useMemo, useEffect } from "react";
 import type { Article } from "@/types";
+import { dateKey } from "@/lib/articles";
 
 const TAG_COLORS: Record<string, string> = {};
 const PALETTE = [
@@ -217,12 +218,15 @@ export function KnowledgePage({ articles }: { articles: Article[] }) {
 
     switch (sort) {
       case "oldest":
-        list = [...list].sort((a, b) => (a.date_saved > b.date_saved ? 1 : -1));
+        list = [...list].sort((a, b) => (dateKey(a) > dateKey(b) ? 1 : -1));
         break;
       case "title":
         list = [...list].sort((a, b) => a.title.localeCompare(b.title));
         break;
       default:
+        // newest — re-sort by date_published (with fallback) so client-side
+        // sort matches initial server-side order even after filtering.
+        list = [...list].sort((a, b) => (dateKey(b) > dateKey(a) ? 1 : -1));
         break;
     }
 
