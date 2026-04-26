@@ -8,6 +8,20 @@ const synthesisDir = path.join(process.cwd(), "..", "workspace", "knowledge-base
 
 const DAY_MS = 24 * 60 * 60 * 1000;
 
+/**
+ * gray-matter parses unquoted YAML dates (e.g. `date_created: 2026-04-25`) as
+ * JS Date objects. Calling `String()` on those produces "Sat Apr 25 2026..."
+ * which breaks lexicographic sort (e.g. "Thu Apr 16" > "Sat Apr 25" because
+ * 'T' > 'S'). Same bug as articles.ts had; fixed there with normalizeDate.
+ */
+function normalizeDate(v: unknown): string {
+  if (v == null) return "";
+  if (v instanceof Date && !isNaN(v.getTime())) {
+    return v.toISOString().slice(0, 10);
+  }
+  return String(v);
+}
+
 function resolveSourceRefs(slugs: string[]): SourceRef[] {
   const articles = getAllArticles();
   const byslug = new Map(articles.map((a) => [a.slug, a]));
@@ -53,7 +67,7 @@ export function getAllSyntheses(): Synthesis[] {
     const sourceRefs = resolveSourceRefs(slugs);
 
     const freshnessWindow = Number(data.freshness_window_days ?? 180);
-    const dateCreated = String(data.date_created ?? "");
+    const dateCreated = normalizeDate(data.date_created);
     const created = dateCreated ? new Date(dateCreated) : today;
     const staleDate = new Date(created.getTime() + freshnessWindow * DAY_MS);
     const daysUntilStale = Math.floor((staleDate.getTime() - today.getTime()) / DAY_MS);
