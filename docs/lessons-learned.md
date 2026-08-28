@@ -611,3 +611,10 @@ Found new problems? Welcome to:
 | **Control output size** | Default brief; confirm before large outputs; one step at a time |
 
 Follow these, your secretary system becomes rock-solid.
+
+## 2026-08-28（teahouse 衝刺週 wrap-up）
+
+- **Pitfall**：yfinance `fast_info.previous_close` 會回傳錯誤基準價（MU 誤算 -6.3%，實為 -2.7%）。盤中報價一律用 `history()/download()` 日線核對，fast_info 只當快篩。
+- **Pitfall**：搜尋引擎摘要裡的 repo 名 `_NAME_` 底線可能是 markdown 斜體殘留，不是真名（DreambigOu/_ELI5_ → 實為 DreambigOu/ELI5）。clone 404 時先懷疑這個。
+- **Improvement**：貼文文體迭代閉環成型——Kurt/朋友每次批改 → 開採進 `humanizer-zh/references/voice-profile.md`（四批語料）＋ `teahouse-promo/refs/threads-rules.md`（短句流/漏斗收法/一則一重點）。新稿先過這兩份再出手，被退率明顯下降（v1 全退 → v3 一次過）。
+- **Improvement**：AskUserQuestion 多輪（3 輪、每輪 ≤4 題、附建議選項）是把模糊戰略收斂成作戰表的高效流程，適合任何「方向多、決策雜」的開案（本次 teahouse v1.1 十項拍板一次完成）。
