@@ -12,7 +12,18 @@ tags: [weekly-notes, META, meta-compute-optionality, neoclouds, CRWV, NBIS, PLTR
 
 # KP 週記 49:Meta 算力/Meta 做雲/PCE 改革/Karp 罵大模型
 
-> 定調:這次 Meta 引發的回調**不是鬼故事,是「合理修正」**(基於邏輯推演的風險溢價調整,非假新聞恐慌)。半導體在「進攻矛」巔峰時容錯率變低 —— 別猜 Meta 下季 capex,檢查組合是否過度暴露在單一假設。
+## Summary
+
+FOMO研究院 KP 週記第 49 期(2026-07-03)定調 7 月初由 Meta 觸發的市場回調是「合理修正」而非恐慌鬼故事,建議投資人檢查組合是否過度暴露單一假設而非猜測下季 capex。Meta 2026 capex 上看 **$1,250-1,450 億**(日燒約 $3.8 億),Zuckerberg 於 7/2 內部 town hall 首度承認「過去至少四個月 AI agent 發展軌跡未如預期加速」,KP 判定這是 Meta 自身戰略節奏問題而非系統性算力過剩,並區分 Meta 做雲的兩條軌道:**託管 API 難贏(生態綁定深)、裸機出租是自然延伸但衝擊 Neoclouds(CRWV/NBIS)**。同時 BEA 修改 PCE 統計方法回溯修正至 2021 年,加上 6 月非農僅 57K 遠低於預期,使升息機率短期歸零;Palantir 的 Karp 則抨擊 token 計費結構性扭曲與企業「交出 alpha」的風險,以 **Ontology** 差異化對抗微軟 7/2 宣布砸 **$25 億**成立 Frontier Company 搶食 FDE(前線部署工程師)市場的競爭。文末將本期敘事直接對應到 INTC/MU/CIEN 等頁面 7 月初因「Meta 傳出售過剩算力」而下殺的具體跌因。
+
+## Key Takeaways
+
+- **Meta 算力非過剩,是節奏問題**:2026 capex $1,250-1,450 億,Zuckerberg 承認 AI agent 進展未如預期加速,但 KP 判定屬 Meta 自身戰略節奏、非系統性算力過剩。
+- **Meta 做雲兩條軌道**:託管 API 難贏(三大雲生態綁定深),裸機出租(對標 xAI Colossus 租給 Anthropic)才是自然延伸,直接對沖 capex 但衝擊 CRWV/NBIS 等 Neoclouds。
+- **PCE 統計改革降息預期**:BEA 修改三類算法回溯至 2021,5 月核心 PCE 3.4% 恐被下修 10-20bps;疊加 6 月非農僅 57K,升息機率短期歸零。
+- **Karp 炮轟大模型**:批評 token 計費結構性扭曲、企業「交出 alpha」風險,以 Palantir 的 Ontology 差異化對抗。
+- **FDE 戰場升溫**:微軟 7/2 砸 **$25 億**成立 Frontier Company,加上 OpenAI Deployment Company、Anthropic Applied AI Engineers,顯示前線部署工程師成為新戰場。
+- **對接註記**:本期是 INTC(−9%)、MU、CIEN 7 月初「Meta 傳出售過剩算力」跌因的完整敘事源。
 
 ## 主題一|Meta 算力過剩?(七月修正的觸發器)
 

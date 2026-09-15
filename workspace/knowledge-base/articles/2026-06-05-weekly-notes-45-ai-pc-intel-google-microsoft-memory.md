@@ -12,7 +12,18 @@ related_projects: [kurt-library, fundamental-platform]
 
 # AI PC時代？加息？記憶體需求減半？ - KP思考筆記(第45期)
 
-> 開場（宏觀+心態）：週五全線 Beta 式下跌 — 強勁非農 → 市場開始為年底「加息」定價。**2022 災難是因加息幅度+持續超預期**;若只是一次性微調則不同。市場超買已久，任何風吹草動都引發回撤（資金找理由獲利了結）。**「擇時」陷阱：何時重新進場比何時離場更難**;判斷錯遇 V 轉會更痛苦 FOMO 追高。波動是權益投資入場券（不能拒 10-30% 回撤又要 50-100% 報酬）。**先釐清身分**：Trader（趨勢/動能/止損）vs Investor（深度體檢:集中度/信念感/估值安全邊際/因果邏輯）。KP 自己選擇「硬扛但收縮戰線 — 衛星標的撤出加碼高信念核心」（底氣=獲利緩衝+無槓桿+清楚每個持倉邏輯）。
+## Summary
+
+FOMO研究院 KP 週記第 45 期(2026-06-05)開場先定調總經心態:非農強勁引發市場為年底升息重新定價，作者選擇「硬扛但收縮戰線」以獲利緩衝+無槓桿因應波動。全篇五大主題環繞 AI 供應鏈權力重組:**NVIDIA 靠 RTX Spark 把 CUDA 生態延伸進 AI PC 終端,微軟與 NVIDIA 形成「房東與水電公司」式共生**;Intel 則主打「CPU 是 Agentic AI 的編排層大腦」論述,靠 **18A 製程 + Xeon 6+** 搶回系統調度話語權;Alphabet 完成人類史上最大單一增資 **$847.5 億**(含 Berkshire $100 億私募),2026 資本支出上看 **$1,800-1,900 億**,凸顯四大雲端巨頭合計 capex **$7,250 億**的軍備競賽;微軟 Build 2026 則傳達「拒絕嫉妒型創新」的平台化戰略,靠 Frontier Tuning 與私有資料「爬山」建立企業級護城河。最受關注的是 SemiAnalysis 報告引發「NVIDIA 記憶體需求減半」恐慌,KP 澄清**被砍的只是 CPU 側 LPDDR5X 系統記憶體、不是最貴的 HBM4**,黃仁勳改用 96GB 模組+插槽式 SOCAMM2 設計反而讓機架變便宜、總出貨量暴增,記憶體超級週期邏輯未變。作者將此串連至 Micron(MU)/SK Hynix/Samsung 的 DRAM+NAND 雙曝險投資邏輯,視為本期最具可操作性的結論。
+
+## Key Takeaways
+
+- **CUDA 進軍 AI PC**:NVIDIA 靠 RTX Spark(N1/N1X 晶片)聯手微軟,把 CUDA 生態從資料中心延伸到終端,128GB 統一記憶體(LPDDR5X)是埋在 2027-28 的種子。
+- **Intel 編排層論述**:Xeon 6+ 於 18A 出貨(tape-out >300),主打 CPU 是 Agentic AI「分支邏輯/狀態管理」的大腦,靠 Perplexity、SambaNova 案例展示異質運算協調者角色。
+- **Alphabet 史上最大增資**:完成 **$847.5 億**股權融資(含 Berkshire $100 億),2026 capex 指引 **$1,800-1,900 億**,凸顯四大 hyperscaler 合計 capex **$7,250 億**。
+- **微軟拒絕「嫉妒型創新」**:Nadella 強調不追逐模型軍備競賽,靠 Frontier Tuning、Microsoft IQ、Scout 等工具把私有資料「爬山」變成企業 AI 護城河。
+- **記憶體「減半」是假恐慌**:SemiAnalysis 報告只反映 CPU 側 LPDDR5X 降規(每機架省 $80 萬),GPU 側 HBM4 需求完全沒受影響,總出貨量反而因機架變便宜而暴增。
+- **投資落點**:KP 認為 Micron(MU)/SK Hynix/Samsung 的 DRAM+NAND 雙曝險超級週期邏輯不變,MU 為高優先候選;INTC 的 18A/編排層敘事仍需觀察「持續交付」。
 
 ## 主題一：當 Windows 遇上 CUDA，AI PC 如何權力重組？
 

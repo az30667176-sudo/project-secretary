@@ -12,7 +12,19 @@ related_projects: [kurt-library, fundamental-platform]
 
 # Tesla/SpaceX 合併？Anthropic 超越 OpenAI？Dell 為甚麼大漲？ - KP思考筆記(第44期)
 
-> 開場：重讀 Peter Lynch《One Up on Wall Street》。「投資者為準備修正/預測修正所損失的錢，遠比修正本身損失的還多。」很多人把「波動」誤認「風險」—— 短期下跌只是波動，真正風險是「不在場」失去複利機會成本。謹慎應體現在標的篩選嚴苛 + 倉位紀律，不是預測崩盤。
+## Summary
+
+KP@FOMOSoc 思考筆記第44期(2026-05-29),開場重讀 Peter Lynch 名言「投資者為預測修正所損失的錢,遠比修正本身損失的還多」,強調謹慎應體現在標的篩選+倉位紀律而非預測崩盤。五大主題:①**Tesla/SpaceX 合併傳聞**——Wedbush 分析師喊 2027 上半年合併機率 80-90%,但股權結構不對稱(Musk 在 SpaceX 掌 85% 投票權、在 Tesla 僅 ~20%)+ 2016 SolarCity 自我交易陰影使短期成事機率極低;②**Marvell** 悄悄從「ASIC 第二名」轉型雙引擎——**互連(Interconnect)已成資料中心業務佔比最大部分**,光學 DSP 市佔 >60%,拿下 NVIDIA $20 億戰略投資;③**Snowflake** 財報後單日暴漲 **35%**,靠與 AWS 簽 **$60 億五年合約**(押注 Graviton CPU + NVIDIA GPU)完成從「AI 敗將」到「AI 贏家」的敘事翻轉;④**Dell** 財報營收 $438 億(+88%)、AI 伺服器營收暴增 **+757%**,證明 AI 是「翻新整個機房」的催化劑而非排擠傳統 IT 預算,20 年最強營運槓桿(OpEx 佔比降至 8.4%);⑤**Anthropic** 同週完成 $650 億 Series H(估值 $9,650 億超越 OpenAI)+ **$360 億 TPU 租賃債務融資**,記憶體三雄(Micron/Samsung/SK Hynix)入股形成晶片-雲端-模型垂直整合生態。
+
+## Key Takeaways
+
+- **Tesla/SpaceX 合併機率分歧**:Wedbush 喊 80-90%(2027上半年),但預測市場 Kalshi 顯示 <40%;股權結構不對稱(SpaceX Musk 掌 85% 投票權 vs Tesla 僅 ~20%)+ 2016 SolarCity 自我交易陰影,短期成事機率低。
+- **Marvell 雙引擎轉型**:CEO 揭露「互連(非 ASIC)已成資料中心業務佔比最大部分」,成長預期從 +50% 上調到 +70% YoY,光學 DSP 市佔 >60%,拿下 **NVIDIA $20 億戰略投資**。
+- **Snowflake 敘事翻轉**:財報後單日暴漲 **35%**,靠 **$60 億五年 AWS 合約**(綁定 Graviton CPU + NVIDIA GPU)、13,600+ 客戶採用 AI 功能,重新定位為企業 Agent 的「可信賴執行環境」。
+- **Dell AI 伺服器爆發**:單季營收 $438 億(+88%),AI 伺服器營收 **+757%** 至 $161 億,全年指引上調至 $600 億,OpEx 佔比暴跌至 20 年新低 8.4%,盤後大漲 30%。
+- **Dell 評級面臨自我修正**:KP 原評級為 Sell $175,但此份財報數字構成強烈反證,凸顯 AI 基建週期廣度可能被系統性低估。
+- **Anthropic 融資雙軌**:同週完成 **$650 億 Series H**(估值 $9,650 億超越 OpenAI)+ **$360 億 TPU 租賃債務融資**(Apollo+Blackstone 籌資、Broadcom 擔保),用「昂貴股權買大腦、聰明債務買肌肉」。
+- **記憶體三雄入股 Anthropic**:Micron、Samsung、SK Hynix 成為 Series H 投資人,形成「晶片/記憶體源頭→雲端→前沿模型」的垂直整合生態,強化 HBM 長期需求鎖定。
 
 ## 主題一：Tesla 和 SpaceX 考慮合併？
 

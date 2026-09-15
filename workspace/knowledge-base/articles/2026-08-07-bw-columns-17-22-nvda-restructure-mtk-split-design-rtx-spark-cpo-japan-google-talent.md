@@ -12,7 +12,19 @@ tags: [bw-columns, NVDA, segment-restructure, Hyperscale-ACIE, edge-computing, p
 
 # KP 商周專欄合輯(第十七至二十二期,原刊 2026-05-28 → 06-25,8/7 解禁)
 
-> 六篇獨立專欄的「導演剪輯版」(未經編輯部刪節)。主題:NVDA 財報結構重組 / 聯發科拆分式設計 / RTX Spark 敘事戰 / CPO 兩條時間線 / 黃仁勳繞道日本 / Google 人才警報。**對本站最有殺傷力的是第十八期(去中間商化 → AVGO/MRVL 統包溢價終結)與第二十期(CPO 延後 ≠ 光通訊沒戲)**。
+## Summary
+
+FOMO研究院商周專欄合輯(KP,第17-22期,原刊2026-05-28至06-25、8/7解禁)收錄六篇獨立專欄的「導演剪輯版」,涵蓋NVDA財報結構重組、聯發科拆分式設計、RTX Spark敘事戰、CPO兩條時間線、黃仁勳繞道日本、Google人才警報六大主題,其中**對投資殺傷力最大的是第十八期(去中間商化終結AVGO/MRVL統包溢價)與第二十期(CPO量產延後不等於光通訊沒戲)**。第十七期指出NVDA財報重組為「Hyperscale vs ACIE」兩大板塊,Q1兩者已幾乎平分秋色(**Hyperscale ~$379億 vs ACIE ~$374億**),但ACIE客戶多為政府/企業自建缺乏領先指標。第十八期揭露**Google TPU v9戰略轉向聯發科(Humufish)、原交給Broadcom的Pumafish專案僅一個月即取消**,巨頭走「拆分式設計」自留運算晶粒與HBM採購,導致**傳統ASIC雙頭Broadcom/Marvell的統包溢價(光HBM一項就加15-20%利潤)被結構性削弱**。第二十期釐清CPO延遲的真相:**Scale-out CPO(外網)2025年底已出貨,Scale-up CPO(內網)才是延到2028-2029**,中短期LITE/COHR營收動能來自雷射與800G/1.6T模組、與CPO時程無關。其餘專欄涵蓋日本上游材料瓶頸(EUV光阻劑市佔>90%)與Google核心人才(Shazeer、Jumper)出走對估值倍數的侵蝕路徑。
+
+## Key Takeaways
+
+- **NVDA財報新框架**:資料中心細分為Hyperscale(~$379億,季增12%)與ACIE(~$374億,季增31%),ACIE客戶多為政府/企業自建、採購不公開,一旦放緩可能因缺乏領先指標而衝擊情緒更大。
+- **去中間商化終結ASIC統包溢價**(第十八期⭐):Google TPU v9自行設計運算晶粒、直接向台積電下單、直接向三星/SK採購HBM,聯發科僅做I/O晶粒與封裝整合支援;Broadcom/Marvell的傳統統包溢價(HBM轉手15-20%利潤)被削弱,「ASIC設計服務正在代工化」。
+- **CPO有兩條時間線,不是一場空窗期**(第二十期⭐):Scale-out CPO(機櫃對外連線)2025年底已出貨,Scale-up CPO(GPU-GPU內網,規模是外網的16倍)才是延到2028-2029;LPO→NPO是遞進技術路徑而非替代方案;延後真因是良率(單顆光引擎95%→商業化需99.5%+),測試設備反而比CPO量產更早受惠。
+- **NVDA真金白銀押注雷射短缺是結構性**:2025年3月投資Coherent與Lumentum各$20億+多年期採購承諾,顯示認定EML雷射短缺非短期週期問題。
+- **RTX Spark是敘事戰不是硬體革命**:真正創新是CUDA生態原封不動搬上Windows on Arm,但已多次延期、量產恐2026年底至2027年初,生態成熟要到2027-2028。
+- **黃仁勳繞道日本反映供應鏈瓶頸權力**:日本雖無法提供Phase 1系統級方案,但EUV光阻劑市佔>90%、先進封裝ABF薄膜>95%仍是隱形地基;Rapidus追加公共資金累計逾¥2.35-2.6兆(逾$160億)目標2027年商業化2nm。
+- **Google人才警報侵蝕的是估值倍數不是營收**:Transformer共同作者Noam Shazeer轉投OpenAI、AlphaFold作者John Jumper轉投Anthropic,結構性診斷為「對Google,AI是鞏固既有帝國的工具;對OpenAI/Anthropic,AI就是帝國本身」。
 
 ## 十七期(5/28)|NVDA 財報大重組:92% vs 8% 的新圖像
 

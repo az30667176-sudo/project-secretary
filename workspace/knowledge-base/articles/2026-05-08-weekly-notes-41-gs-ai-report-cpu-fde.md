@@ -12,7 +12,19 @@ related_projects: [kurt-library, fundamental-platform]
 
 # 高盛 AI 拐點？CPU 狂歡？Anthropic/OAI 加速應用？ - KP思考筆記(第41期)
 
-> 開場：KP 刻意「反 FOMO」—— 半導體狂歡時改寫冷門主題（LNG/化肥/油服 deep-46），「用研究打敗 FOMO」。本期核心回歸 AI，拆解高盛 40 頁 AI 深度報告。仍是堅定科技/AI/半導體多頭（核心持倉）但派對最嗨時保持冷靜觀察。
+## Summary
+
+KP@FOMOSoc 思考筆記第41期(2026-05-08),開場強調刻意「反 FOMO」——半導體狂歡時改寫冷門主題,「用研究打敗 FOMO」,但仍是堅定科技/AI/半導體多頭。本期核心拆解高盛 40 頁 AI 深度報告:高盛逆轉「用量↑成本↑毛利↓」的舊敘事,提出 **Token 成本年降 60-70% 遠快於售價降速,2026 起將出現正向利潤率拐點**,Agentic AI 用量革命更讓 **2030 全球 Token 需求達 2026 的 25 倍**;但企業採用面高盛給出冷水數字——**70-90% 企業仍在實驗、<25% 真正規模化**,採用是 15 年 S 曲線、**巔峰滲透僅 35-40%**。高盛推薦九大贏家含 Broadcom/NVIDIA/AMD/Amazon/Google/Meta/Microsoft/Cloudflare/Accenture。另兩大主題:**CPU 故事被財報數字證實**(AMD 把 2030 伺服器 CPU 市場預測翻倍至 $1,200億、ARM 資料中心版稅翻倍但市場看空、Intel 謹慎復甦);以及 **Anthropic/OpenAI 複製 Palantir 的 Forward Deployed Engineer(FDE)模式**部署「地面部隊」,將尖端 AI 落地能力商品化,合理預期 2027-2028 才會明顯更多 AI 進生產環境。讀者 KunHan Lee 反駁高盛 Agent ROI 計算過於簡化,個人效率+30% 但整專案進度可能反而更慢。
+
+## Key Takeaways
+
+- **AI 利潤奇點**:高盛指出 Token **成本**年降 60-70% 遠快於**售價**降速(已近打平甚至回升),2026 起將出現正向毛利率拐點,capex 不是泡沫而是「會自己越跑越快的產線」。
+- **Agentic AI 用量爆炸**:長上下文+多輪推理+工具呼叫讓同一工作流 Token 放大 10-100 倍,**2030 全球 Token 需求 = 2026 的 25 倍**,企業端終將佔全球 Token 70%+。
+- **採用曲線潑冷水**:目前 **70-90% 企業仍在實驗、<25% 真正規模化**;高盛估 AI 採用是 15 年 S 曲線(快於歷史中位數 29 年),但**巔峰滲透僅 35-40%**,轉折點約在 2030。
+- **高盛九大贏家**:半導體(Broadcom/NVIDIA/AMD)、Hyperscaler(Amazon/Google/Meta)、軟體服務(Microsoft/Cloudflare/Accenture),核心邏輯是「賣工作量取代賣人頭」把 TAM 從軟體預算擴張到全球白領薪資池。
+- **CPU 故事被財報證實**:AMD 把 2030 伺服器 CPU 市場預測**翻倍**至 35%+ CAGR/$1,200億,下季伺服器 CPU 指引 +70%;ARM 資料中心版稅翻倍但股價因隱憂下跌;Intel 謹慎復甦,Xeon 6 獲 NVIDIA DGX 採用。
+- **FDE 模式**:OpenAI(The Deployment Company,估值 $100億)與 Anthropic(+Accenture、+Blackstone/Goldman/H&F)複製 Palantir 打法,派工程師進駐客戶落地 AI,合理預期 2027-2028 才會明顯放量。
+- **讀者反駁值得追蹤**:KunHan Lee 指出高盛 Agent ROI 計算過於簡化,個人效率 +30% 但整體大型專案進度可能反而更慢,揭示組織方式未必適合人機協作。
 
 ## 主題一（GS 報告）：AI 利潤奇點已到？
 

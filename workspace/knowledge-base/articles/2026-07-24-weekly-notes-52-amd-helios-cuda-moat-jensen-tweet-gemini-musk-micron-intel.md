@@ -12,7 +12,18 @@ tags: [weekly-notes, AMD, Helios, MI455X, UALink, attach-rate, NVDA, CUDA-moat, 
 
 # KP 週記 52(一週年):Helios / CUDA 退潮 / 黃仁勳首推文 / Gemini / Musk 謝美光 / Intel 業績
 
-> 一週年開場:「半分鐘給你的是資訊,一個小時給你的是思考的框架。資訊會過期,框架不會。」
+## Summary
+
+FOMO研究院 KP 週記一週年紀念(第 52 期,2026-07-24)以「資訊會過期,框架不會」開場,六大主題涵蓋 AMD、CUDA 護城河、NVIDIA、Google、Tesla 與 Intel。**AMD 發布首個機櫃級平台 Helios**(72× MI455X + 31TB HBM4,基於開放的 ORW 規格),訂單實錘涵蓋 **Microsoft、Meta 6GW、Anthropic 2GW、Oracle/OpenAI**,象徵從「賣引擎」轉型「賣整車」的系統級平台公司。CUDA 護城河出現鬆動:Anthropic 用 Claude 自己優化 AMD ROCm、DeepSeek 已跑上萬張華為 Ascend 950,KP 定性護城河從「不可進入」變成「偏好性」——**「CUDA 沒有乾涸,只是從城堡變成會弄濕鞋的河」**。黃仁勳人生首則 X 推文聯署〈Open Weights and American AI Leadership〉,核心邏輯是開放權重讓 GPU 買家從 3 個閉源巨頭擴大到百萬玩家。Google 坦承 Gemini 3.5 Pro 跳票、agentic coding 落後,但靠 **Flash 系列 + API 吞吐 220 億 tokens/分鐘 + Cloud 營收 +82%**打分發戰;Musk 罕見公開感謝美光在記憶體大漲期間保留 Tesla 產能,並揭露**一台人形機器人記憶體需求約為一台 L2+ 車的 10 倍**、目前無分析師將其納入 2026-27 需求模型。Intel 財報(7/23)實質+25%仍打穿上修後預期 12%,但**Foundry 外部客戶營收僅約 5%($293M),KP 解讀為內部 Xeon 需求排擠了外部代工產能**。
+
+## Key Takeaways
+
+- **AMD Helios 平台落地**:72× MI455X + 31TB HBM4 機櫃級平台,訂單實錘涵蓋 Microsoft、Meta(6GW)、Anthropic(2GW MI450)、Oracle/OpenAI,估值邏輯從「週期性 GPU 供應商」轉向「系統級平台公司」。
+- **CUDA 護城河鬆動**:Anthropic 用 Claude 自己優化 ROCm、DeepSeek 已跑上萬張華為 Ascend 950;KP 定性護城河從「不可進入」變成「偏好性」。
+- **黃仁勳首推文**:聯署〈Open Weights and American AI Leadership〉,核心邏輯是開放權重讓 GPU 買家從 3 個閉源巨頭擴大到百萬玩家。
+- **Google 打分發戰**:坦承 Gemini 3.5 Pro 跳票、agentic coding 落後,但靠 Flash 系列 + API 吞吐 220 億 tokens/分鐘 + **Cloud 營收 +82%(backlog $5,140 億)**變現。
+- **Musk 罕見感謝美光**:記憶體大漲期間美光為 Tesla 保留產能;**一台人形機器人記憶體需求約為一台 L2+ 車的 10 倍**,目前無分析師將其納入需求模型。
+- **Intel 財報「內部排擠」新解讀**:實質+25%仍打穿上修後預期 12%,但 Foundry 外部客戶營收僅約 5%($293M)——KP 解讀為自家 Xeon 需求把 18A 產能吃光,排擠外部代工放量。
 
 ## 主題一|AMD Helios:從賣引擎到賣整車
 
